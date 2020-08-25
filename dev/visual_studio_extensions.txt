@@ -1,0 +1,3 @@
+twitch-zoulhadjtv : minimap - Already included now in recent VS as advanced scroll bar
+lctv-shittts : AStyle Extension (lukamicoder)
+mummi-bilbo: Force UTF8 (with BOM) (jz5)

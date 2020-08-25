@@ -1,0 +1,1 @@
+copy "%CORE%\archive\tool\shortcuts\start_server_deferred.lnk" "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\"

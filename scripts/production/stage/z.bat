@@ -1,0 +1,2 @@
+Y:\bergedge\hi5\program\hstart ""C:\Program Files\7-Zip\7z" a -mx=9 Z:\symbol\stage\x86\%1.7z Z:\stage\time\Win32\stage\%1.pdb"
+Y:\bergedge\hi5\program\hstart ""C:\Program Files\7-Zip\7z" a -mx=9 Z:\symbol\stage\x64\%1.7z Z:\stage\time\x64\stage\%1.pdb"

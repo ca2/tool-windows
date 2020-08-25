@@ -1,0 +1,176 @@
+		******************************
+			MIDI1TO0 v1.8
+	
+		   midi binary format 1 to 0
+		      by Guenter Nagler 
+			    1995 
+		  (info@gnmidi.com)
+		******************************
+
+[0] FEATURES
+    + reads a binary midi file of format 1 (needs to be valid)
+    + writes a binary midi files of format 0 
+    + combines all tracks of input into one track 
+    + sorts events in order of time
+    + careful merging of tracks that share same channel 
+
+[1] BACKGROUND
+Midi format 1 contains a tempo track and one or more singlechannel 
+tracks that should be played together. Midi format 0 contains only
+one track. Midi format 0 files are efficienter to handle for 
+midi players because all events are directly one after the other.
+For Midi 1 files the player must merge the midi commands from all tracks
+in real time (in real time).
+Most Midi players can't play format 1 files correctly. 
+I noticed some typical types where many midi players fail:
+ * The player refuses loading format 1 files and only accepts format 0 files
+   (many keyboards, some software players)
+ * The midi file format 1 contains masses of tracks (> 16, some produced
+   over 100 tracks not each track really contained music)
+ * The midi file contains some tracks that share the same channel 
+   (e.g. percussion, drums)
+   using different parameters (e.g. volume, effects) 
+   The player might play it but does not care of the different track parameters
+   (e.g. plays all those tracks with same program and same volume, effects...)
+
+MIDI1TO0 produces a format 0 midi file that can solve these problems.
+Using option -exact it is careful with track parameters so that most channel conflicts between
+tracks are solved. Under some conditions this is not possible because of 
+midi restrictions and is usually an error of the midi file author.
+
+Standard midi restriction: 
+  Two tracks cannot play same note on same channel at same time with 
+  different note parameters (e.g. different programs)!
+  The author must use different channels in such cases, or the note 
+  will be played with only one of the conflicting parameter settings!
+
+Information: 
+  Sometimes careful merging of tracks sharing same channel can produce
+  results with bad sound (e.g. loudness of a sound quickly changes between
+  high and low). In such cases the conversion can not be done automatically
+  because of channel conflicts. It would need to edit the original file first
+  manually with a midi editor to solve the channel problems (use alternate 
+  channels if possible, or try to use same parameters in these tracks, or 
+  prevent playing notes on these tracks at same time.
+
+Use MIDIFMT *.mid to show the version of midi files.
+
+[2] FILES DESCRIPTION
+
+MIDI1TO0.EXE.........converter program
+MIDI1TO0.DOC.........this file, showing usage of MIDI1TO0.EXE
+only MIDI1TO0.EXE is required to run program
+
+[3] COPYRIGHT
+
+MIDI1TO0 (c) 1995 was created by Guenter Nagler.
+
+MIDI1TO0 is free and may be used as you wish with this one exception:
+
+    You may NOT charge any fee or derive any profit for distribution
+    of MIDI1TO0.  Thus, you may NOT sell or bundle MIDI1TO0 with any 
+    product in a retail environment (shareware disk distribution, CD-ROM,
+    etc.) without permission of the author.
+
+You may give MIDI1TO0 to your friends, upload it to a BBS, or ftp it to
+another internet site, as long as you don't charge anything for it.
+
+Distributing modified programs or own programs that use parts of this 
+program requires permission of author!
+
+[4] DISCLAIMER
+
+MIDI1TO0 was designed to handle 100% compatible midi files.
+Normally the program stops when illegal or corrupt midifiles are 
+used at input. 
+
+Use MIDI1TO0 at your own risk.  Anything you do with MIDI1TO0 is your
+responsibility, and not the author's.  Any damage caused to any person,
+computer, software, hardware, company, or business by running MIDI1TO0 
+is your responsibility, and the author will not be liable.
+
+If you don't understand these terms, or are not sure of something, or
+are afraid something bad might come of using MIDI1TO0, don't  use  it!
+You are here forewarned.
+
+[5] INSTALLATION
+
+[MSDOS]
+Simply copy MIDI1TO0.EXE in a directory that is in your path.
+When you start the program without arguments
+
+C:\> MIDI1TO0
+
+you should get the usage text (see next section)
+
+[6] USAGE
+
+usage: midi1to0 [-quiet] [-exact] srcfile.mid dstfile.mid
+-quiet	be quiet, don't tell percentage
+-exact	solve merging tracks with conflicting channel by
+	refreshing all track parameters before playing notes
+ midi1to0 merges channels into one track
+ This program only converts format 1 midi files.
+-quiet	be quiet, don't tell percentage
+-exact	solve merging tracks of same channel by refreshing
+  all parameters before playing notes.
+
+MIDI1TO0 does not convert files that are not of format 1!
+In this case the program prints the version and exits.
+
+Warning: MIDI1TO0 does not warn about overwriting existing destfile.mid !
+
+[8] SUGGESTIONS / COMMENTS / BUG REPORTS / QUESTIONS
+
+	     WWW:    http://www.gnmidi.com
+  		contains all my dos/unix midi programs
+	     EMAIL:  info@gnmidi.com
+
+[9] USE
+For example, you have a midi file example1.mid that you expect to be format 1.
+
+MIDI1TO0 example1.mid example0.mid
+
+If it is a format 2 midi, the program will stop with a message like that:
+   "example1.mid is format 2. This program does not convert it to 0."
+
+If it is a format 0 midi, the program will stop with a message like that:
+   "example1.mid is already format 0"
+
+If it is a format 1 midi, it will try to merge all tracks into example0.mid:
+  23%  (counting from 0 to 100)
+  "output written to example0.mid"
+
+[10] CHANGES
+v1.0 to v1.1:
+  - added option -quiet (default is verbose)
+    error messages are printed in all cases
+  - modifications in midi input/output parser 
+  - little bug fixed: some files produced more than one
+    end of track messages inside format 0 track
+
+v1.1 to v1.2:
+  - using advanced midi parser midiio
+  - added option -exact: careful merging of tracks with same channel (all channel and track
+    parameters are stored and restored before playing notes).
+  - added hidden option -version to shows program version
+      usage:  midi1to0 -version
+
+v1.2 to v1.3:
+  - support long events (larger than 1 kb)
+
+v1.3 to v1.4:
+  - bug fix: program did not stop for certain truncated midi files.  
+
+v1.4 to v1.5:
+  - minor bug fix: conversion of pause at end of midi
+
+v1.5 to v1.6:
+  - more initialization for safety
+
+v1.6 to v1.7:
+  - help for users that are not able to use DOS utilities
+
+v1.7 to v1.8:
+  - remove port meta prefix commands which make no sense in format 0
+  - remove tracknames that are not in first track

@@ -1,0 +1,17 @@
+#include <olli_lights.h>
+int main()
+{
+
+    printf("Hello World!!");
+
+    led_on();
+
+    sleep(1_s);
+
+    led_off();
+
+    sleep(1_s);
+
+    return 0;
+
+}

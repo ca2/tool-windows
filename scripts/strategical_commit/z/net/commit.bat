@@ -1,0 +1,1 @@
+hstart /errmsg="C:\netnodenet\%1 commit error!" "svn commit --force-log --file C:\bergedge\lemon\windows\scripts\strategical_commit\z\ca2\commit-message.txt Z:\netnodenet\%1"

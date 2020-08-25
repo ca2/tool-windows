@@ -1,0 +1,1 @@
+Y:\bergedge\hi5\program\hstart.exe /WAIT /NOUAC "cmd.exe /c start Y:\bergedge\lemon\windows\scripts\home\do_restart_spooler_custom.lnk"

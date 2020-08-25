@@ -1,0 +1,1 @@
+@echo If auratype is sounding it is ok!!

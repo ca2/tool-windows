@@ -1,0 +1,1 @@
+hstart /errmsg="Z:\nordroid\%1 commit error!" "svn commit --force-log --file Y:\bergedge\lemon\windows\scripts\strategical_commit\z\nordroid\commit-message.txt Z:\nordroid\%1"

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+platform=`echo $1 | tr -d '\n'`
+
+file=`echo $2 | tr -d '\n'`
+
+key=`cat /c/ca2/symbol.key`
+
+path="/c/stage/time/$platform/stage/$file"
+
+url="https://ca2.cc/symbol?key=$key&rel=$platform%2Fstage%2F$file"
+
+wget -q -o nul --no-check-certificate -O $path $url
+
+gzip -d $path

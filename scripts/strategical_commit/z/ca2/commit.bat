@@ -1,0 +1,1 @@
+hstart /errmsg="Z:\ca2\%1 commit error!" "svn commit --force-log --file Y:\bergedge\lemon\windows\scripts\strategical_commit\z\ca2\commit-message.txt Z:\ca2\%1"

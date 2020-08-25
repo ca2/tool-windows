@@ -1,0 +1,1 @@
+regsvr32 /u C:\core\time2\x64\basis\_desk_tb.dll

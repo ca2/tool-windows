@@ -1,0 +1,27 @@
+;
+;  Database file ca2.email.dns for Default zone scope in zone ca2.email.
+;      Zone version:  18
+;
+
+@                       IN  SOA a.ca2.network. hostmaster.ca2.network. (
+                        		18           ; serial number
+                        		900          ; refresh
+                        		600          ; retry
+                        		86400        ; expire
+                        		300        ) ; default TTL
+
+;
+;  Zone NS records
+;
+
+@                       NS	b.ca2.network.
+b.ca2.network.          3600	A	167.114.17.2
+@                       NS	a.ca2.network.
+a.ca2.network.          3600	A	51.79.78.188
+
+;
+;  Zone records
+;
+
+@                       A	167.114.17.12
+@                       MX	10	ca2.email.

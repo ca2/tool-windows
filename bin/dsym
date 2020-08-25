@@ -1,0 +1,19 @@
+#!/bin/bash
+
+CORES=8
+
+echo "spanning at $CORES cores/threads"
+
+key=`cat /c/ca2/symbol.key`
+
+wget -q -o nul --no-check-certificate -O /c/stage/time/symbol32.txt "https://ca2.cc/symbol?key=$key&rel=Win32%2Fstage"
+mkdir -p /c/stage/time/Win32/stage/
+rm /c/stage/time/Win32/stage/*
+linecount=`wc -l < /c/stage/time/symbol32.txt`
+cat /c/stage/time/symbol32.txt | pv -l -s $linecount | xargs -P $CORES -I % dsymbol Win32 %
+
+wget -q -o nul --no-check-certificate -O /c/stage/time/symbol64.txt "https://ca2.cc/symbol?key=$key&rel=x64%2Fstage"
+mkdir -p /c/stage/time/x64/stage/
+rm /c/stage/time/x64/stage/*
+linecount=`wc -l < /c/stage/time/symbol64.txt`
+cat /c/stage/time/symbol64.txt | pv -l -s $linecount | xargs -P $CORES -I % dsymbol x64 %

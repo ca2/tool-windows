@@ -1,0 +1,10 @@
+
+;
+;  Root Name Server Hints File:
+;
+;	These entries enable the DNS server to locate the root name servers
+;	(the DNS servers authoritative for the root zone).
+;	For historical reasons this is often referred to as the
+;	"Cache File"
+;
+

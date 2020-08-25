@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mv /c/archive/nodetime-windows/Win32/basis/bin/*.lib /c/archive/nodetime-windows/Win32/basis/lib/
+mv /c/archive/nodetime-windows/Win32/stage/bin/*.lib /c/archive/nodetime-windows/Win32/stage/lib/
+mv /c/archive/nodetime-windows/x64/basis/bin/*.lib /c/archive/nodetime-windows/x64/basis/lib/
+mv /c/archive/nodetime-windows/x64/stage/bin/*.lib /c/archive/nodetime-windows/x64/stage/lib/
+
+cp -Rf /c/archive/nodetime-windows/Win32/stage/* /c/archive/nodetime-windows/Win32/cover/
+cp -Rf /c/archive/nodetime-windows/x64/stage/* /c/archive/nodetime-windows/x64/cover/

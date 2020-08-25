@@ -1,0 +1,74 @@
+;
+;  Database file ca2.cc.dns for Default zone scope in zone ca2.cc.
+;      Zone version:  141
+;
+
+@                       IN  SOA a.ca2.network. hostmaster.ca2.network. (
+                        		141          ; serial number
+                        		900          ; refresh
+                        		600          ; retry
+                        		86400        ; expire
+                        		300        ) ; default TTL
+
+;
+;  Zone NS records
+;
+
+@                       NS	b.ca2.network.
+b.ca2.network.          A	167.114.17.2
+@                       NS	a.ca2.network.
+a.ca2.network.          A	51.79.78.188
+
+;
+;  Zone records
+;
+
+@                       A	167.114.17.1
+@                       MX	10	ca2.email.
+*                       CNAME	ca2.cc.
+centos                  A	167.114.97.131
+centos-production       CNAME	ip021.ca2.cc.
+fedora-production       CNAME	ip019.ca2.cc.
+ip000                   A	167.114.17.0
+ip001                   A	167.114.17.1
+ip002                   A	167.114.17.2
+ip003                   A	167.114.17.3
+ip004                   A	167.114.17.4
+ip005                   A	167.114.17.5
+ip006                   A	167.114.17.6
+ip007                   A	167.114.17.7
+ip008                   A	167.114.17.8
+ip009                   A	167.114.17.9
+ip010                   A	167.114.17.10
+ip011                   A	167.114.17.11
+ip012                   A	167.114.17.12
+ip013                   A	167.114.17.13
+ip014                   A	167.114.17.14
+ip015                   A	167.114.17.15
+ip016                   A	149.56.81.16
+ip017                   A	149.56.81.17
+ip018                   A	149.56.81.18
+ip019                   A	149.56.81.19
+ip020                   A	149.56.81.20
+ip021                   A	149.56.81.21
+ip022                   A	149.56.81.22
+ip023                   A	149.56.81.23
+ip024                   A	149.56.81.24
+ip025                   A	149.56.81.25
+ip026                   A	149.56.81.26
+ip027                   A	149.56.81.27
+ip028                   A	149.56.81.28
+ip029                   A	149.56.81.29
+ip030                   A	149.56.81.30
+ip031                   A	149.56.81.31
+macos-production        CNAME	ip026.ca2.cc.
+manjaro-production      CNAME	ip018.ca2.cc.
+newjersey               A	207.246.85.23
+opensuse-production     CNAME	ip020.ca2.cc.
+repos                   A	167.114.17.8
+stage-macos             CNAME	ip027.ca2.cc.
+symserver               CNAME	ip015ca.ca2.cc.
+ubuntu                  A	158.69.72.191
+ubuntu-production       CNAME	ip017.ca2.cc.
+ubuntu-server           CNAME	ip016.ca2.cc.
+windows10pro            CNAME	ip031.ca2.cc.

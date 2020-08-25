@@ -1,0 +1,1 @@
+call z_all

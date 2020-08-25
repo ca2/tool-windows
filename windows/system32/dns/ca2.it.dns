@@ -1,0 +1,26 @@
+;
+;  Database file ca2.it.dns for Default zone scope in zone ca2.it.
+;      Zone version:  6
+;
+
+@                       IN  SOA a.ca2.network. hostmaster.ca2.network. (
+                        		6            ; serial number
+                        		900          ; refresh
+                        		600          ; retry
+                        		86400        ; expire
+                        		300        ) ; default TTL
+
+;
+;  Zone NS records
+;
+
+@                       NS	a.ca2.network.
+a.ca2.network.          3600	A	51.79.78.188
+@                       3600	NS	b.ca2.network.
+b.ca2.network.          3600	A	167.114.17.2
+
+;
+;  Zone records
+;
+
+@                       A	167.114.17.1

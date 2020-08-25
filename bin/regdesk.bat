@@ -1,0 +1,1 @@
+regsvr32 C:\core\time2\x64\cube_stage\_desk_tb.dll
