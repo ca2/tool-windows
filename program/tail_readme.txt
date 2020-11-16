@@ -263,7 +263,7 @@ Other Registry Entries
 ----------------------
 
 The only other registry entries are used to store the position of the
-window, and the state of the tick-boxes against some menu items.
+window, and the state of the millis-boxes against some menu items.
 All keys live at 'HKCU\Software\Objektiv\Tail for Win32\'.
 
 

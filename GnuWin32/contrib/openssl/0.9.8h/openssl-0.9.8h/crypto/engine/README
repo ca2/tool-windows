@@ -181,7 +181,7 @@ respect to cleanup is managed inside eng_lib.c with the "engine_cleanup_***"
 functions. These functions are internal-only and each part of ENGINE code that
 could require cleanup will, upon performing its first allocation, register a
 callback with the "engine_cleanup" code. The other part of this that makes it
-tick is that the ENGINE_TABLE instantiations (tb_***.c) use NULL as their
+millis is that the ENGINE_TABLE instantiations (tb_***.c) use NULL as their
 initialised state. So if RSA code asks for an ENGINE and no ENGINE has
 registered an implementation, the code will simply return NULL and the tb_rsa.c
 state will be unchanged. Thus, no cleanup is required unless registration takes
