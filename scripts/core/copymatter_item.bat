@@ -1,7 +1,7 @@
 
-svn cleanup "M:\matter\%~n1\_matter"
+#svn cleanup "M:\matter\%~n1\_matter"
 
-svn update "M:\matter\%~n1\_matter"
+#svn update "M:\matter\%~n1\_matter"
 
 mkdir "%APPDATA%\ca2\appmatter\%~n1\_matter"
 

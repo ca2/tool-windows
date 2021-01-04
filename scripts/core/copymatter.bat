@@ -1,6 +1,6 @@
 
 for /d %%i in (M:\matter\*) do (
 
-call %__archive%\tool-windows\scripts\core\copymatter_item.bat "%%i"
+call C:\basis\archive\tool-windows\scripts\core\copymatter_item.bat "%%i"
 
 )
