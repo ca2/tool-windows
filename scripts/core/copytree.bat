@@ -9,4 +9,4 @@ xcopy C:\basis\time-windows\x64\*.dll C:\core\time\x64\ /Y /R /F /I /C /E
 xcopy C:\basis\time-windows\x64\*.lib C:\core\time\x64\ /Y /R /F /I /C /E
 
 
-call %__archive%\tool-windows\scripts\core\copymatter.bat
+call C:\basis\archive\tool-windows\scripts\core\copymatter.bat
