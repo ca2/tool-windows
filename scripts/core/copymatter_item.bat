@@ -1,7 +1,7 @@
 
-#svn cleanup "M:\matter\%~n1\_matter"
+cd "M:\matter\%~n1"
 
-#svn update "M:\matter\%~n1\_matter"
+git fetch origin
 
 mkdir "%APPDATA%\ca2\appmatter\%~n1\_matter"
 
