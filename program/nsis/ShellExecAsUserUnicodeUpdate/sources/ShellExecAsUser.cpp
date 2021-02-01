@@ -1,4 +1,4 @@
-// ShellExecAsUser.cpp : Defines the entry point for the DLL application.
+// ShellExecAsUser.cpp : Defines the entry point_i32 for the DLL application.
 //
 #include <windows.h>
 #include <shlDisp.h>
