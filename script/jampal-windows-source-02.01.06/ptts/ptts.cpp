@@ -18,7 +18,7 @@
 */
 
 
-// ptts.cpp : Defines the entry point_i32 for the console application.
+// ptts.cpp : Defines the entry point for the console application.
 //
 
 #include <objbase.h>

@@ -1925,7 +1925,7 @@ inline void SpInitEvent(SPEVENT * pe)
 * SpEventSerializeSize *
 *----------------------*
 *   Description:
-*       Computes the required size_i32 of a buffer to serialize an event.  The caller
+*       Computes the required size of a buffer to serialize an event.  The caller
 *   must specify which type of serialized event is desired -- either SPSERIALIZEDEVENT
 *   or SPSERIALIZEDEVENT64.    
 *
