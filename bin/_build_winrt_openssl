@@ -1,0 +1,60 @@
+#!/bin/bash
+
+OPENSSL="openssl-3.0.3"
+
+BASE_DIR="/r/third_winrt"
+
+SRC_FOLDER="/c/basis/operating-system/third-universal_windows"
+
+STG_FOLDER="/c/operating-system/storage-universal_windows"
+
+function build()
+{
+
+   BASE_DIR=$1
+   OPENSSL=$2
+   NAME=$3
+   DEBUG=$4
+   CONFIGURE=$5
+   SHARED=$6
+
+
+   cd $BASE_DIR   
+   mkdir $NAME
+   tar -xzvf $OPENSSL.tar.gz --strip-components=1 -C $BASE_DIR/$NAME
+   cd $NAME
+   perl Configure $CONFIGURE $DEBUG --prefix=$BASE_DIR/output/$NAME --openssldir=$BASE_DIR/program/$NAME $SHARED no-asm no-hw no-dso no-tests no-stdio no-async
+   nmake
+
+}
+
+
+function install()
+{
+
+   BASE_DIR=$1
+   NAME=$2
+   REL=$3
+   SRC_FOLDER=$4
+   STG_FOLDER=$5
+
+   cd $BASE_DIR   
+   cd $NAME
+
+   nmake install
+
+   SOURCE_DIR="$SRC_FOLDER/$REL"
+   STORAGE_DIR="$STG_FOLDER/$REL"
+
+   mkdir -p $SOURCE_DIR/include/
+   mkdir -p $STORAGE_DIR/binary/
+   mkdir -p $STORAGE_DIR/library/
+
+   cp -Rf $BASE_DIR/output/$NAME/include/* $SOURCE_DIR/include/
+   cp -Rf $BASE_DIR/output/$NAME/bin/* $STORAGE_DIR/binary/
+   cp -Rf $BASE_DIR/output/$NAME/lib/* $STORAGE_DIR/library/
+   
+}
+
+
+

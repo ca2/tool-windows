@@ -1,0 +1,53 @@
+#!/bin/bash
+
+
+do_zip()
+{
+
+
+      cd /c/operating_system/
+
+      zip storage-windows.zip storage-windows
+
+      cp storage-windows.zip /c/store/windows
+
+
+}
+
+
+AUDIO="C:\Users\camilo\AppData\Roaming\user\audio\sysevent\cpp_good_build.wav"
+AUDIOREADY="C:\Users\camilo\AppData\Roaming\user\audio\sysevent\production_ready.wav"
+#start "$AUDIO"
+
+
+DEVENVCOM="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.com"
+THIRDSLN="C:\main\solution-windows\third-all.sln"
+
+
+"$DEVENVCOM" "$THIRDSLN" -Build "Debug|x64"
+start "$AUDIO"
+"$DEVENVCOM" "$THIRDSLN" -Build "Release|x64"
+start "$AUDIO"
+"$DEVENVCOM" "$THIRDSLN" -Build "StaticDebug|x64"
+start "$AUDIO"
+"$DEVENVCOM" "$THIRDSLN" -Build "StaticRelease|x64"
+start "$AUDIO"
+
+
+"$DEVENVCOM" "$THIRDSLN" -Build "Debug|Win32"
+start "$AUDIO"
+"$DEVENVCOM" "$THIRDSLN" -Build "Release|Win32"
+start "$AUDIO"
+"$DEVENVCOM" "$THIRDSLN" -Build "StaticDebug|Win32"
+start "$AUDIO"
+"$DEVENVCOM" "$THIRDSLN" -Build "StaticRelease|Win32"
+start "$AUDIO"
+
+
+do_zip
+
+
+start "$AUDIOREADY"
+
+
+

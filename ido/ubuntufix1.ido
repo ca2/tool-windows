@@ -1,0 +1,5 @@
+set_cursor 1377,612
+sleep 1000
+click 100
+sleep 1000
+click 100

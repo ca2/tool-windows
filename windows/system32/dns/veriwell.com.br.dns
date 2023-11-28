@@ -1,0 +1,22 @@
+;
+;  Database file veriwell.com.br.dns for Default zone scope in zone veriwell.com.br.
+;      Zone version:  2
+;
+
+@                       IN  SOA a.ca2.network. hostmaster.ca2.network. (
+                        		2            ; serial number
+                        		900          ; refresh
+                        		600          ; retry
+                        		86400        ; expire
+                        		300        ) ; default TTL
+
+;
+;  Zone NS records
+;
+
+@                       NS	a.ca2.network.
+
+;
+;  Zone records
+;
+

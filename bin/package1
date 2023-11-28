@@ -1,0 +1,58 @@
+#!/bin/bash
+
+BASE_DIR=`pwd`
+
+OUTPUT_DIR="$BASE_DIR/basis/time-windows/x64/stage"
+
+ROOT=$(dirname $1)
+
+APP_NAME=$(basename $1)
+
+if [ ! -z "$ROOT" ]; then
+
+   if [ ! -z "$APP_NAME" ]; then
+
+      application_build_helper -package "$BASE_DIR/source/$ROOT/$APP_NAME"
+
+      exit $?
+
+   fi
+
+fi
+
+cd $BASE_DIR
+
+UNDERSCORE_PLATFORM="windows"
+SLASHED_OPERATING_SYSTEM="windows"
+
+APPLICATION_MATTER_LIST_FILE_PATH="$BASE_DIR/application_matter_list.txt"
+
+#find $BASE_DIR/ -name application_matter.txt -print > $APPLICATION_MATTER_LIST_FILE_PATH
+
+#PACKAGE_DIR="/store/$DISTRO/$DESKTOP_ENVIRONMENT/$DISTRO_RELEASE"
+PACKAGE_DIR="/b/windows"
+
+mkdir -p $PACKAGE_DIR
+
+#echo "$DISTRO" > "$PACKAGE_DIR/____distro.txt"
+#echo "$DESKTOP_ENVIRONMENT" > "$PACKAGE_DIR/___desktop_environment.txt"
+#echo "$DISTRO_RELEASE" > "$PACKAGE_DIR/__distro_release.txt"
+echo "$UNDERSCORE_PLATFORM" > "$PACKAGE_DIR/_operating-system.txt"
+
+
+while read -r line; do
+
+   line=$(echo $line)
+
+   APP_DIR=$(dirname $line)
+
+   echo "------------------------------------------------------"
+   echo "$APP_DIR"
+   echo ""
+
+   application_build_helper -package "$APP_DIR"
+   
+done < $APPLICATION_MATTER_LIST_FILE_PATH
+
+
+

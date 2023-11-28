@@ -1,0 +1,1 @@
+call %__archive%\tool-windows\scripts\core\kill.bat

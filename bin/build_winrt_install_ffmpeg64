@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+BASE_DIR=`pwd`
+
+. $(dirname "$0")/_build_winrt_ffmpeg
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+(install $BASE_DIR ffmpeg-x64-debug "x64/debug" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR ffmpeg-x64-release "x64/release" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR ffmpeg-x64-static_debug "x64/static_debug" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR ffmpeg-x64-static_release "x64/static_release" "$SRC_FOLDER" "$STG_FOLDER") &
+
+
+

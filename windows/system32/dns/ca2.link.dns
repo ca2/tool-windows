@@ -1,0 +1,35 @@
+;
+;  Database file ca2.link.dns for Default zone scope in zone ca2.link.
+;      Zone version:  36
+;
+
+@                       IN  SOA a.ca2.network. hostmaster.ca2.network. (
+                        		36           ; serial number
+                        		900          ; refresh
+                        		600          ; retry
+                        		86400        ; expire
+                        		300        ) ; default TTL
+
+;
+;  Zone NS records
+;
+
+@                       NS	2.ca2.network.
+2.ca2.network.          A	167.114.17.2
+@                       NS	1.ca2.network.
+1.ca2.network.          A	51.79.78.188
+@                       NS	a.ca2.network.
+
+;
+;  Zone records
+;
+
+@                       A	167.114.17.14
+@                       MX	10	ca2.email.
+a                       1200	A	10.0.0.1
+                        1200	A	10.0.0.2
+                        1200	A	10.0.0.101
+                        1200	A	10.0.0.102
+canada                  1200	A	10.0.0.1
+net                     A	10.0.0.1
+netnode-canada          1200	A	10.0.0.1

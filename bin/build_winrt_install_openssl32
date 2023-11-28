@@ -1,0 +1,19 @@
+#!/bin/bash
+
+. $(dirname "$0")/_build_winrt_openssl
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+(install $BASE_DIR openssl-Win32-basis "Win32/basis" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR openssl-Win32-cube_basis "Win32/cube_basis" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR openssl-Win32-cube_stage "Win32/cube_stage" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR openssl-Win32-stage "Win32/stage" "$SRC_FOLDER" "$STG_FOLDER") &
+
+
+

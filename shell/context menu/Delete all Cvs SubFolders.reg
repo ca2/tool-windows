@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\DeleteCVS]
+@="Delete CVS Folders"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\DeleteCVS\command]
+@="cmd.exe /c \"TITLE Removing SVN Folders in %1 && COLOR F2 && FOR /r \"%1\" %%f IN (CVS) DO RD /s /q \"%%f\" \""

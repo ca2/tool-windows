@@ -1,0 +1,88 @@
+#!/bin/bash
+
+
+VERSION="3.0.7"
+
+
+SRC_FOLDER="/c/main/operating-system/operating-system-windows"
+
+
+STG_FOLDER="/c/operating-system/storage-windows"
+
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+
+cd $BASE_DIR
+
+
+function compile()
+{
+
+
+   PLATFORM=$1
+   CONFIGURATION=$2
+   NAME=$3
+   DEBUG=$4
+   CONFIGURE=$5
+   SHARED=$6
+
+
+   RELATIVE=openssl/$VERSION/$PLATFORM/$CONFIGURATION
+
+
+   cd $BASE_DIR   
+   mkdir -p $RELATIVE
+   cd $RELATIVE
+
+
+   echo "Downloading openssl.tar.gz to $RELATIVE ..."
+   wget -O openssl.tar.gz  https://www.openssl.org/source/openssl-$VERSION.tar.gz
+   echo "Uncompressing openssl.tar.gz to $RELATIVE ..."
+   tar -xzf openssl.tar.gz --strip-components=1 -C .
+   perl Configure $CONFIGURE $DEBUG --prefix=$BASE_DIR/$RELATIVE/build --openssldir=$BASE_DIR/$RELATIVE/program $SHARED
+   nmake
+
+}
+
+function install()
+{
+
+   BASE_DIR=$1
+   VERSION=$2
+   PLATFORM=$3
+   CONFIGURATION=$4
+   REL=$5
+   SRC_FOLDER=$6
+   STG_FOLDER=$7
+
+   
+   RELATIVE=openssl/$VERSION/$PLATFORM/$CONFIGURATION
+
+
+   cd $BASE_DIR   
+   cd $RELATIVE
+
+   nmake install
+
+   SOURCE_DIR="$SRC_FOLDER/$REL"
+   STORAGE_DIR="$STG_FOLDER/$REL"
+
+   mkdir -p $SOURCE_DIR/include/
+   mkdir -p $STORAGE_DIR/binary/
+   mkdir -p $STORAGE_DIR/library/
+
+   cp -Rf $BASE_DIR/$NAME/build/include/* $SOURCE_DIR/include/
+   cp -Rf $BASE_DIR/$NAME/build/bin/* $STORAGE_DIR/binary/
+   cp -Rf $BASE_DIR/$NAME/build/lib/* $STORAGE_DIR/library/
+   
+}
+
+
+

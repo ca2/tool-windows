@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+BASE_DIR=/c/port
+
+
+. $(dirname "$0")/_build_ffmpeg
+
+
+(compile $BASE_DIR i386 Win32 Debug --enable-debug --enable-shared --disable-static) &
+(compile $BASE_DIR i386 Win32 Release --disable-debug --enable-shared --disable-static) &
+(compile $BASE_DIR i386 Win32 StaticDebug --enable-debug "" "") &
+(compile $BASE_DIR i386 Win32 StaticRelease --disable-debug "" "") &
+
+
+

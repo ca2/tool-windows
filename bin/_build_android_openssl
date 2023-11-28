@@ -1,0 +1,58 @@
+#!/bin/bash
+
+export ANDROID_NDK_ROOT=/c/archive/android-ndk-r23b
+export OPENSSL_VERSION="3.0.2"
+
+mkdir "openssl-${OPENSSL_VERSION}"
+
+pushd "openssl-${OPENSSL_VERSION}"
+
+curl -O "https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz"
+
+build() 
+{
+
+	PLATFORM=$1
+	ANDROID_API=$2
+	TARGET_PLATFORM=$3
+	
+	echo ""
+	echo "----- Building OpenSSL ${OPENSSL_VERSION} libraries for Android - "$TARGET_PLATFORM" -----"
+	echo ""
+
+	mkdir $TARGET_PLATFORM
+	tar xfz "openssl-${OPENSSL_VERSION}.tar.gz" -C $TARGET_PLATFORM --strip-components=1
+
+	mkdir -p /c/operating-system/storage-android/library/$TARGET_PLATFORM/Debug
+	mkdir -p /c/operating-system/storage-android/library/$TARGET_PLATFORM/Release
+
+	pushd "${TARGET_PLATFORM}"
+
+	PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/i686-linux-android/bin:$PATH
+	export PATH
+	
+	./Configure $PLATFORM -D__ANDROID_API__=$ANDROID_API shared threads no-asm no-sse2 no-ssl3 no-comp no-engine
+
+	make build_libs -j8
+
+	cp libcrypto.so /c/operating-system/storage-android/library/$TARGET_PLATFORM/Debug/
+	cp libssl.so /c/operating-system/storage-android/library/$TARGET_PLATFORM/Debug/
+	cp libcrypto.so /c/operating-system/storage-android/library/$TARGET_PLATFORM/Release/
+	cp libssl.so /c/operating-system/storage-android/library/$TARGET_PLATFORM/Release/
+
+	popd
+
+}
+
+build "android-x86" "28" "x86"
+build "android-x86_64" "28" "x86_64"
+build "android-arm" "28" "ARM"
+build "android-arm64" "28" "ARM64"
+
+popd
+
+rm -Rf /c/basis/operating-system/third-android/include/openssl
+cp -Rf openssl-${OPENSSL_VERSION}/x86/include/openssl /c/basis/operating-system/third-android/include/openssl
+
+
+

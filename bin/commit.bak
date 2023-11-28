@@ -1,0 +1,84 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+
+BASEDIR=`cat $HOME/current_working_directory.txt`
+
+BASEDIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${BASEDIR}")
+
+BASEDIR=$(sed -e 's/^\([A-Z]\)[:]/\/\1/'<<<"${BASEDIR}")
+
+BASEDIR=$(sed -e 's/\\/\//'<<<"${BASEDIR}")
+
+if [ -z "$BASEDIR" ]; then
+
+echo "Please run command:"
+echo "set_working_directory <WORKING_DIRECTORY_PATH>"
+echo "to set the base folder path."
+
+fi
+
+else
+
+BASEDIR=$1
+
+fi
+
+path_pattern="path = *"
+
+pushd () {
+    command pushd "$@" > /dev/null
+}
+
+popd () {
+    command popd "$@" > /dev/null
+}
+
+
+submodule()
+{
+
+        if [ -d "$1" ]; then
+
+                pushd $1
+
+                DIR=$(pwd)
+
+                DIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${DIR}")
+
+                echo "Processing $DIR..."
+
+                if [ -f .gitmodules ]; then
+
+                        while read line; do
+
+                                trimmed_line=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${line}")
+
+                                if [[ $trimmed_line == $path_pattern ]]; then
+
+                                        submodule_name=$(sed -e 's/^path\s*=\s*//'<<<"${line}")
+
+                                        submodule ./$submodule_name
+
+                                fi
+
+                        done < ./.gitmodules
+
+                fi
+
+                popd
+				
+				git add .
+				git commit -F/c/operating-system/dedicatory.txt
+				git push
+				
+
+        fi
+
+}
+
+
+submodule $BASEDIR
+
+
+

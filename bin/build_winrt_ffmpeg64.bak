@@ -1,0 +1,23 @@
+#!/bin/bash
+
+BASE_DIR=`pwd`
+
+. $(dirname "$0")/_build_winrt_ffmpeg
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+cd $BASE_DIR
+
+(build $BASE_DIR x86_64 ffmpeg-x64-debug --enable-debug --enable-shared --disable-static -MDd) &
+(build $BASE_DIR x86_64 ffmpeg-x64-release --disable-debug --enable-shared --disable-static -MD) &
+(build $BASE_DIR x86_64 ffmpeg-x64-static_debug --enable-debug "" "" -MTd) &
+(build $BASE_DIR x86_64 ffmpeg-x64-cube_stage --disable-debug "" "" -MT) &
+
+
+

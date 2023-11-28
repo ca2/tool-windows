@@ -1,0 +1,26 @@
+#!/bin/bash
+
+BASE_DIR=`pwd`
+
+APPLICATION_LIST_FILE_PATH="application_list.txt"
+
+while read line; do
+
+   APP_DIR=$(dirname $line)
+
+   echo "------------------------------------------------------"
+
+   echo "touching $APP_DIR/matter.zip"
+
+   touch $APP_DIR/matter.zip
+
+   echo "touching $APP_DIR/deployment.rc"
+
+   touch $APP_DIR/deployment.rc
+
+   echo ""
+
+done <$APPLICATION_LIST_FILE_PATH
+
+
+

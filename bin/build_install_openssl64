@@ -1,0 +1,19 @@
+#!/bin/bash
+
+. $(dirname "$0")/_build_openssl
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+(install $BASE_DIR openssl-x64-Debug "x64/Debug" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR openssl-x64-Release "x64/Release" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR openssl-x64-StaticDebug "x64/StaticDebug" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR openssl-x64-StaticRelease "x64/StaticRelease" "$SRC_FOLDER" "$STG_FOLDER") &
+
+
+

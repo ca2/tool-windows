@@ -1,0 +1,1 @@
+hstart /errmsg="Z:\winmetro\%1 commit error!" "svn commit --force-log --file Y:\bergedge\lemon\windows\scripts\strategical_commit\z\winmetro\commit-message.txt Z:\winmetro\%1"

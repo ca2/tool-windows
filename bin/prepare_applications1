@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PLATFORM=$2
+CONFIGURATION=$3
+
+application_build_helper -prepare_applications application_list.txt $PLATFORM $CONFIGURATION
+
+
+
+
+

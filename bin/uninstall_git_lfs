@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+GIT_LFS_SKIP_SMUDGE=1 git filter-branch -f --prune-empty --tree-filter '
+  git lfs checkout
+  git lfs ls-files | cut -d " " -f 3 | xargs rm -f
+  git rm -f --ignore-unmatch .gitattributes
+' --tag-name-filter cat -- --all
+
+

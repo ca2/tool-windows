@@ -1,0 +1,12 @@
+
+
+The best way to do this across bootup is to put it in the registry. Open regedit.exe and navigate to
+
+HKEY_LOCAL_MACHINE \ SYSTEM \ CurrentControlSet \ Control \ Session Manager \ DOS Devices
+
+Add a new REG_SZ value and name it X: where X is your drive letter
+
+The value should be the path in this form
+
+\DosDevices\C:\Folder\Example    
+

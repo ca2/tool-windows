@@ -1,0 +1,171 @@
+#!/bin/bash
+
+
+RELEASE=`http_get -case_insensitive_ends_eat .git -trim https://raw.githubusercontent.com/FFmpeg/FFmpeg/master/RELEASE`
+
+
+SRC_FOLDER="/c/main/operating-system/operating-system-windows"
+
+
+STG_FOLDER="/c/operating-system/storage-windows"
+
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+
+cd $BASE_DIR
+
+
+function prepare()
+{
+
+
+   PATH="openssl/$RELEASE/$PLATFORM/$CONFIGURATION"
+
+
+   if [ "$PLATFORM" == "Win32" ]; then
+      
+      ARCH="i386"
+
+	elif  [ "$PLATFORM" == "x64" ]; then
+	
+      ARCH="x86_64"
+	  
+	else
+	 
+      echo "Unsupported Platform \"$PLATFORM\"?!?"
+	 
+		exit -1
+	 
+	fi
+	 
+	if [ "$CONFIGURATION" == *"Debug"* ]; then
+	 
+		DEBUG="--enable-debug"
+		
+	else
+	
+		DEBUG="--disable-debug"
+	
+	fi
+
+	if [ "$CONFIGURATION" == *"Static"* ]; then
+	 
+		SHARED=""
+		
+		STATIC=""
+		
+	else
+	
+		SHARED="--enable-shared"
+		
+		STATIC="--disable-static"
+	
+	fi
+
+
+}
+
+
+function compile()
+{
+
+   PLATFORM=$1
+   CONFIGURATION=$2
+
+
+   prepare
+   
+   
+   cd $BASE_DIR   
+   mkdir -p "$PATH"
+   cd $PATH
+   
+   
+   echo "BASE_DIR is $BASE_DIR"
+   echo "PATH is $PATH"
+   echo "RELEASE is $RELEASE"
+   echo "ARCH is $ARCH"
+   echo "DEBUG is $DEBUG"
+   echo "SHARED is $SHARED"
+   echo "STATIC is $STATIC"
+   
+   
+exit -1
+   #DEBUG --enable-debug
+
+   #ARCH i386   x86_64
+
+   #for shared: --enable-shared --disable-static
+   #for static: ""              ""
+   
+#(compile x64 Debug --enable-debug --enable-shared --disable-static -MDd???) &
+#(compile x64 Release --disable-debug --enable-shared --disable-static -MD???) &
+#(compile x64 StaticDebug --enable-debug "" "" -MTd???) &
+#(compile x64 StaticRelease --disable-debug "" "" -MT???) &
+
+
+   git clone https://git.ffmpeg.org/ffmpeg.git .
+   #./configure --enable-asm --enable-yasm --arch=$ARCH --disable-ffserver --disable-avdevice --disable-swscale --disable-doc --disable-ffplay --disable-ffprobe --disable-ffmpeg $SHARED $STATIC --disable-bzlib --disable-libopenjpeg --disable-iconv --disable-zlib --prefix=$BASE_DIR/output/$NAME --toolchain=msvc $DEBUG
+   ./configure --enable-asm --enable-yasm --arch=$ARCH --disable-doc $SHARED $STATIC --disable-bzlib --disable-libopenjpeg --disable-iconv --disable-zlib --prefix=$BASE_DIR/$PATH/build --toolchain=msvc $DEBUG
+   make -j 8
+
+}
+
+
+function install_lib()
+{
+
+   REL=$3
+   SRC_FOLDER=$4
+   STG_FOLDER=$5
+   LIBRARY_NAME=$6
+
+   cp -Rf $BASE_DIR/$NAME/lib$LIBRARY_NAME/*.dll $STORAGE_DIR/binary/
+   cp -Rf $BASE_DIR/$NAME/lib$LIBRARY_NAME/*.pdb $STORAGE_DIR/binary/
+
+}
+
+function install()
+{
+
+   NAME=$2
+   REL=$3
+   SRC_FOLDER=$4
+   STG_FOLDER=$5
+
+   cd $BASE_DIR   
+   cd $NAME
+
+   make install
+
+   SOURCE_DIR="$SRC_FOLDER"
+   STORAGE_DIR="$STG_FOLDER/$REL"
+
+   mkdir -p $SOURCE_DIR/include/
+   mkdir -p $STORAGE_DIR/binary/
+   mkdir -p $STORAGE_DIR/library/
+
+   cp -Rf $BASE_DIR/$NAME/build/include/* $SOURCE_DIR/include/
+   cp -Rf $BASE_DIR/$NAME/build/bin/*.exe $STORAGE_DIR/binary/
+   cp -Rf $BASE_DIR/$NAME/build/bin/*.lib $STORAGE_DIR/library/
+   cp -Rf $BASE_DIR/$NAME/build/lib/* $STORAGE_DIR/library/
+
+   install_lib "$1" "$2" "$3" "$4" "$5" "avcodec"
+   install_lib "$1" "$2" "$3" "$4" "$5" "avdevice"
+   install_lib "$1" "$2" "$3" "$4" "$5" "avfilter"
+   install_lib "$1" "$2" "$3" "$4" "$5" "avformat"
+   install_lib "$1" "$2" "$3" "$4" "$5" "avutil"
+   install_lib "$1" "$2" "$3" "$4" "$5" "swresample"
+   install_lib "$1" "$2" "$3" "$4" "$5" "swscale"
+   
+}
+
+
+

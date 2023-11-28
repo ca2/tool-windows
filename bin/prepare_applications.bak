@@ -1,0 +1,64 @@
+#!/bin/bash
+
+if [ "$1" = "app" ]; then
+
+APP_DIR="/c/basis/$2"
+
+application_build_helper "$APP_DIR"
+
+exit
+
+fi
+
+BASE_DIR=$1
+
+if [ -z "$BASE_DIR" ]; then
+
+BASE_DIR=/c/basis
+
+fi
+
+cd $BASE_DIR
+
+APPLICATION_MATTER_LIST_FILE_PATH="$BASE_DIR/application_matter_list.txt"
+
+#find $BASE_DIR/ -name application_matter.txt -print > $APPLICATION_MATTER_LIST_FILE_PATH
+
+UNDERSCORE_PLATFORM="windows"
+
+SLASHED_OPERATING_SYSTEM="windows"
+
+while read line; do
+
+   APP_DIR=$(dirname $line)
+
+   APP_NAME=$(basename $APP_DIR)
+
+   ROOT_DIR=$(dirname $APP_DIR)
+
+   ROOT=$(basename $ROOT_DIR)
+
+   APP_ID="$ROOT/$APP_NAME"
+
+   APP_REL=${APP_ID//[\/-]/_}
+
+   echo "------------------------------------------------------"
+   echo "_${APP_REL}_${UNDERSCORE_PLATFORM}.cpp"
+   echo ""
+
+   if [ ! -d "$APP_DIR/operating-system/${SLASHED_OPERATING_SYSTEM}" ]; then
+
+      mkdir -p "$APP_DIR/operating-system/${SLASHED_OPERATING_SYSTEM}"
+
+   fi
+
+   touch "$APP_DIR/operating-system/${SLASHED_OPERATING_SYSTEM}/_${APP_REL}.cpp"
+   touch "$APP_DIR/deps.txt"
+
+   application_build_helper "$APP_DIR"
+
+done <$APPLICATION_MATTER_LIST_FILE_PATH
+
+
+
+

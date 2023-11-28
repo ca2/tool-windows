@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+BASE_DIR=/c/port
+
+
+. $(dirname "$0")/_build_openssl
+
+
+(compile_and_link $BASE_DIR $VERSION Win32 Debug --debug debug-VC-WIN32 shared) &
+(compile $BASE_DIR $VERSION Win32 Release "" VC-WIN32 shared) &
+(compile $BASE_DIR $VERSION Win32 StaticDebug --debug debug-VC-WIN32 no-shared) &
+(compile $BASE_DIR $VERSION Win32 StaticRelease "" VC-WIN32 no-shared) &
+
+
+

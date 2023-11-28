@@ -1,0 +1,1 @@
+net use B: \\ftpback-bhs1-12.ip-198-100-151.net\ns568481.ip-51-79-78.net

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git checkout --orphan tempBranch $1
+git commit -m "Truncate history to commit $1"
+git rebase --onto tempBranch $1 main

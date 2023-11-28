@@ -1,0 +1,87 @@
+#!/bin/bash
+
+#BASE_DIR="/x/third_winrt"
+
+SRC_FOLDER="/c/basis/operating-system/operating-system-universal_windows"
+
+STG_FOLDER="/c/operating-system/storage-universal_windows"
+
+function build()
+{
+
+   BASE_DIR=$1
+   ARCH=$2
+   NAME=$3
+   DEBUG=$4
+   SHARED=$5
+   STATIC=$6
+   CFLAGS=$7
+
+
+   cd $BASE_DIR   
+   git clone https://git.ffmpeg.org/ffmpeg.git $NAME
+   cd $NAME
+
+   ./configure \
+	--toolchain=msvc \
+	--disable-programs \
+	--disable-doc \
+	--arch=$ARCH \
+	--target-os=win32 \
+	--extra-cflags="$CFLAGS -DWINAPI_FAMILY=WINAPI_FAMILY_APP -D_WIN32_WINNT=0x0A00" \
+	--extra-ldflags="-APPCONTAINER WindowsApp.lib" \
+	--disable-everything $DEBUG \
+	--enable-thumb $SHARED $STATIC \
+	--enable-cross-compile \
+	--enable-d3d11va \
+	--disable-dxva2 \
+	--enable-small \
+	--enable-network \
+	--enable-runtime-cpudetect \
+	--enable-decoder=mjpeg,mpeg4,mpegvideo,h264,flv,rawvideo,flashsv,flashsv2 \
+	--enable-decoder=h264_dxva2,nellymoser,adpcm_swf,aac,pcm_alaw,pcm_f32be,pcm_f32le,pcm_f64be,pcm_f64le,pcm_mulaw,pcm_s16be,pcm_s16le,pcm_s24be,pcm_s24le,pcm_s32be,pcm_s32le,pcm_s8,pcm_u16be,pcm_u16le,pcm_u24be,pcm_u24le,pcm_u32be,pcm_u32le,pcm_u8 \
+	--enable-parser=mpeg4video,mpegaudio,mpegvideo,h261,h264 \
+	--enable-demuxer=mpegvideo,h264,rtsp,flv,mjpeg,rawvideo,mpegts,rm,sdp,mpjpeg,h263 \
+	--enable-protocol=http,tcp,udp \
+	--enable-hwaccel=h264_dxva2,h264_d3d11va,h264_d3d11va2,h264_cuvid \
+	--prefix=$BASE_DIR/output/$NAME
+
+   make
+   
+}
+
+
+
+
+
+function install()
+{
+
+   BASE_DIR=$1
+   NAME=$2
+   REL=$3
+   SRC_FOLDER=$4
+   STG_FOLDER=$5
+
+   cd $BASE_DIR   
+   cd $NAME
+
+   make install
+
+   SOURCE_DIR="$SRC_FOLDER/$REL"
+   STORAGE_DIR="$STG_FOLDER/$REL"
+
+   mkdir -p $SOURCE_DIR/include/
+   mkdir -p $STORAGE_DIR/binary/
+   mkdir -p $STORAGE_DIR/library/
+
+   cp -Rf $BASE_DIR/output/$NAME/include/* $SOURCE_DIR/include/
+   cp -Rf $BASE_DIR/output/$NAME/bin/*.dll $STORAGE_DIR/binary/
+   cp -Rf $BASE_DIR/output/$NAME/bin/*.exe $STORAGE_DIR/binary/
+   cp -Rf $BASE_DIR/output/$NAME/bin/*.lib $STORAGE_DIR/library/
+   cp -Rf $BASE_DIR/output/$NAME/lib/* $STORAGE_DIR/library/
+   
+}
+
+
+

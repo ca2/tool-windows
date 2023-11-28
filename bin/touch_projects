@@ -1,0 +1,22 @@
+#!/bin/bash
+
+BASE_DIR=`pwd`
+
+PROJECT_LIST_FILE_PATH="project_list.txt"
+
+while read line; do
+
+   PROJECT_DIR=$(dirname $line)
+
+   echo "------------------------------------------------------"
+
+   echo "touching $PROJECT_DIR/deployment.rc"
+
+   touch $PROJECT_DIR/deployment.rc
+
+   echo ""
+
+done <$PROJECT_LIST_FILE_PATH
+
+
+

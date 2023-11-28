@@ -1,0 +1,1 @@
+C:\msys\msys.cmd -use-full-path  

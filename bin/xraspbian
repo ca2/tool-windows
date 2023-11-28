@@ -1,0 +1,14 @@
+
+
+export DISTRO="raspbian"
+export DISTRO_RELEASE="11"
+
+
+export CROSS_COMPILATION=1
+export VISUAL_GDB=1
+
+
+export PATH=/c/SysGCC/raspberry/arm-linux-gnueabihf/bin:/c/operating-system/tool-windows/bin:$PATH
+
+
+

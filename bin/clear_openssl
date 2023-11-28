@@ -1,0 +1,42 @@
+#!/bin/bash
+
+. $(dirname "$0")/_build_openssl
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+cd $BASE_DIR
+
+(rm -Rf openssl-Win32-basis) &
+(rm -Rf openssl-Win32-cube_basis) &
+(rm -Rf openssl-Win32-cube_stage) &
+(rm -Rf openssl-Win32-stage) &
+(rm -Rf openssl-x64-basis) &
+(rm -Rf openssl-x64-cube_basis) &
+(rm -Rf openssl-x64-cube_stage) &
+(rm -Rf openssl-x64-stage) &
+
+(rm -Rf output/openssl-Win32-basis) &
+(rm -Rf output/openssl-Win32-cube_basis) &
+(rm -Rf output/openssl-Win32-cube_stage) &
+(rm -Rf output/openssl-Win32-stage) &
+(rm -Rf output/openssl-x64-basis) &
+(rm -Rf output/openssl-x64-cube_basis) &
+(rm -Rf output/openssl-x64-cube_stage) &
+(rm -Rf output/openssl-x64-stage) &
+
+(rm -Rf program/openssl-Win32-basis) &
+(rm -Rf program/openssl-Win32-cube_basis) &
+(rm -Rf program/openssl-Win32-cube_stage) &
+(rm -Rf program/openssl-Win32-stage) &
+(rm -Rf program/openssl-x64-basis) &
+(rm -Rf program/openssl-x64-cube_basis) &
+(rm -Rf program/openssl-x64-cube_stage) &
+(rm -Rf program/openssl-x64-stage) &
+
+

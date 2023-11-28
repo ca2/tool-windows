@@ -1,0 +1,21 @@
+#!/bin/bash
+
+. $(dirname "$0")/_build_winrt_openssl
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+cd $BASE_DIR
+
+(build $BASE_DIR $OPENSSL openssl-Win32-basis --debug debug-VC-WIN32-ONECORE shared) &
+(build $BASE_DIR $OPENSSL openssl-Win32-cube_basis --debug debug-VC-WIN32-ONECORE no-shared) &
+(build $BASE_DIR $OPENSSL openssl-Win32-cube_stage "" VC-WIN32-ONECORE no-shared) &
+(build $BASE_DIR $OPENSSL openssl-Win32-stage "" VC-WIN32-ONECORE shared) &
+
+
+

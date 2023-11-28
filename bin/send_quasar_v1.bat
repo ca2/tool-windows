@@ -1,0 +1,1 @@
+plink -load COM3  <  C:\__operating-system\hi5\a\quasar_v1.txt

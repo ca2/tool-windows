@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+ROOT=$(dirname $1)
+
+NAME=$(basename $1)
+
+APPID="$ROOT/$NAME"
+
+PLATFORM=$2
+
+CONFIGURATION=$3
+
+
+application_build_helper -prepare_application "source/$APPID" $PLATFORM $CONFIGURATION
+
+
+

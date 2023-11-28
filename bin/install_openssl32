@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+BASE_DIR=/c/port
+
+
+. $(dirname "$0")/_build_openssl
+
+
+(install $BASE_DIR $VERSION Win32 Debug "Win32/Debug" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR $VERSION Win32 Release "Win32/Release" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR $VERSION Win32 StaticDebug "Win32/StaticDebug" "$SRC_FOLDER" "$STG_FOLDER") &
+(install $BASE_DIR $VERSION Win32 StaticRelease "Win32/StaticRelease" "$SRC_FOLDER" "$STG_FOLDER") &
+
+
+

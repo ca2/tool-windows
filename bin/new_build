@@ -1,0 +1,20 @@
+
+get_new_release_datetime()
+{
+
+   RELEASEDOT=`date +"%Y.%m%d.%H%M.%S"`
+   RELEASECOMMA=`date +"%Y,%m%d,%H%M,%S"`
+   RELEASEDATETIME=`date +"%Y-%m-%d-%H-%M-%S"`
+
+}
+
+
+get_new_release_datetime
+
+cp /c/basis/operating-system/operating-system-windows/version.rc.template /c/basis/operating-system/operating-system-windows/version.rc
+
+sed -i -b "s/%RELEASEDOT%/$RELEASEDOT/" /c/basis/operating-system/operating-system-windows/version.rc
+sed -i -b "s/%RELEASECOMMA%/$RELEASECOMMA/" /c/basis/operating-system/operating-system-windows/version.rc
+sed -i -b "s/%RELEASEDATETIME%/$RELEASEDATETIME/" /c/basis/operating-system/operating-system-windows/version.rc
+
+

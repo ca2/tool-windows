@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. $(dirname "$0")/_build_winrt_ffmpeg
+
+if [ ! -d $BASE_DIR ]; then
+
+   echo "$BASE_DIR does not exist!!"
+
+   exit -1
+
+fi
+
+cd $BASE_DIR
+
+wget https://www.openssl.org/source/$OPENSSL.tar.gz
+
+
+

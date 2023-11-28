@@ -1,0 +1,77 @@
+#!/bin/bash
+
+
+function do_project()
+{
+
+	PROJECT=$1
+	
+	echo "do_project \"$PROJECT\""
+
+	echo "$PROJECT" >> "$PROJECT_LIST_FILE_PATH"
+
+}
+
+function do_root()
+{
+
+	ROOT="$1"
+
+	echo "do_root \"$ROOT\""
+
+	for project in $ROOT/*; do
+		if [ -d "$project" ]; then
+			do_project "$project"
+		fi
+	done
+	
+}
+
+
+function do_os()
+{
+
+	BASE="$1"
+
+	echo "do_base \"$BASE\""
+
+	for root in $BASE/operating-system-*; do
+		if [ -d "$root" ]; then
+			do_root "$root"
+		fi
+	done
+	
+}
+
+
+
+function do_base()
+{
+
+	BASE="$1"
+
+	echo "do_base \"$BASE\""
+
+	for root in $BASE/*; do
+		if [ -d "$root" ]; then
+			do_root "$root"
+		fi
+	done
+	
+}
+
+
+BASE_DIR="."
+
+PROJECT_LIST_FILE_PATH="$BASE_DIR/project_list.txt"
+
+truncate -s 0 "$PROJECT_LIST_FILE_PATH"
+
+do_os "$BASE_DIR/operating_system"
+
+do_base "$BASE_DIR/source"
+
+
+
+
+

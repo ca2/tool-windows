@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+
+build_sensitive()
+{
+
+
+   cd $HOME
+
+   mkdir sensitive
+
+   cd sensitive
+
+   git clone https://github.com/ca2/build_sensitive build
+
+
+   sudo mkdir "/store_cloud"
+   sudo echo "//cloud.camilothomas.com/store /store_cloud cifs credentials=/home/build/sensitive/build/samba/.cloud_store,iocharset=utf8,uid=1000,dir_mode=0775,file_mode=0664 0 0" >> /etc/fstab
+   sudo ln -s /store_cloud /store
+
+
+
+}
+
+
+
+build_sensitive
