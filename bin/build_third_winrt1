@@ -1,0 +1,41 @@
+
+C:
+
+cd \saturn\PCDraft\pcdraft
+
+echo "Starting the build..." > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+"C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" PCDraft.sln /t:Rebuild /p:Configuration="Demo Release";Platform=Win32
+echo "1, Configuration Demonstration English Release has been built successfully" > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+"C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" PCDraft.sln /t:Rebuild /p:Configuration="Japanese Demo Release";Platform=Win32
+echo "2, Configuration Demonstration Japanese Release has been built successfully" > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+"C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" PCDraft.sln /t:Rebuild /p:Configuration="Release";Platform=Win32
+echo "3, Configuration Professional English Release has been built successfully" > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+"C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" PCDraft.sln /t:Rebuild /p:Configuration="Japanese Release";Platform=Win32
+echo "4, Configuration Profession Japanese Release has been built successfully" > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+"C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" PCDraft.sln /t:Rebuild /p:Configuration="PE Demo Release";Platform=Win32
+echo "5, Configuration Personal Edition Demonstration English Release has been built successfully" > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+"C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" PCDraft.sln /t:Rebuild /p:Configuration="PE Japanese Demo Release";Platform=Win32
+echo "6, Configuration Personal Edition Demonstration Japanese Release has been built successfully" > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+"C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" PCDraft.sln /t:Rebuild /p:Configuration="PE Release";Platform=Win32
+echo "7, Configuration Personal Edition English Release has been built successfully" > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+"C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe" PCDraft.sln /t:Rebuild /p:Configuration="PE Japanese Release";Platform=Win32
+echo "8, Configuration Personal Edition Japanese Release has been built successfully" > \saturn\prompt.txt
+"C:\Program Files\Jampal\ptts.vbs" -u C:\saturn\prompt.txt
+
+
