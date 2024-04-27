@@ -1,7 +1,0 @@
-#!/bin/bash
-
-find -type l -delete
-git reset --hard
-
-
-
