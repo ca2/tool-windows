@@ -1,7 +1,38 @@
 #!/bin/bash
 
-eval $(ssh-agent -s) > /dev/null
-ssh-add ~/.ssh/id_auth &> /dev/null
-ssh-add ~/.ssh/id_sign &> /dev/null
+
+command -v ssh-agent &> /dev/null
+SSH_AGENT_ERROR=$?
+
+command -v ssh-add &> /dev/null
+SSH_ADD_ERROR=$?
+
+SSH_AGENT_SETUP=0
+
+#echo "SSH_AGENT_ERROR=$SSH_AGENT_ERROR"
+#echo "SSH_ADD_ERROR=$SSH_ADD_ERROR"
+
+if [ $SSH_AGENT_ERROR -eq 0 ]; then
+
+	if [ $SSH_ADD_ERROR -eq 0 ]; then
+	
+		#echo "Setting up ssh-agent"
+	
+		eval $(ssh-agent -s) > /dev/null
+		ssh-add ~/.ssh/id_auth &> /dev/null
+		ssh-add ~/.ssh/id_sign &> /dev/null
+		
+		SSH_AGENT_SETUP=1
+		
+	fi
+	
+fi
+
+if [ $SSH_AGENT_SETUP -eq 0 ]; then
+
+	echo 'Failed to setup ssh agent'
+	
+fi
+
 
 
