@@ -20,7 +20,7 @@ if [ $SSH_AGENT_ERROR -eq 0 ]; then
 	
 		eval $(ssh-agent -s) > /dev/null
 		ssh-add ~/.ssh/id_auth &> /dev/null
-		ssh-add ~/.ssh/id_sign &> /dev/null
+		#ssh-add ~/.ssh/id_sign &> /dev/null
 		
 		SSH_AGENT_SETUP=1
 		
