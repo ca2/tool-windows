@@ -61,6 +61,12 @@ submodule()
         if [ -d "$1" ]; then
 
                 pushd $1
+				
+				DIR_NAME=$(basename $1)
+				
+				CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+				
+				CURRENT_BRANCH=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${CURRENT_BRANCH}")
 
                 DIR=$(pwd)
 
@@ -70,15 +76,67 @@ submodule()
 
                 git fetch
 				
-                LIST_MAIN_BRANCH=$(git branch --list main)
+				PARENT_BRANCH_HINT=""
+				
+				if [ -f ../parent_branch_hint_for_$DIR_NAME ]; then
+				
+					PARENT_BRANCH_HINT=$(cat ../parent_branch_hint_for_$DIR_NAME)
 
-                if [ -n "$LIST_MAIN_BRANCH" ]; then
+				fi
+					
+				if [ -n "$PARENT_BRANCH_HINT" ]; then
+				
+					#if [[ "$CURRENT_BRANCH" != "$PARENT_BRANCH_HINT" ]]; then
 
-                    git checkout main
+						echo "Checking out \"$PARENT_BRANCH_HINT\" branch..."
+						
+						git checkout -B $PARENT_BRANCH_HINT heads/$PARENT_BRANCH_HINT
+						
+					#else
+					
+					#	echo "At \"$CURRENT_BRANCH\"..."
+						
+					#fi
+						
+				else
 
-                else
+					LIST_MAIN_BRANCH=$(git branch --list main)
 
-                    git checkout master
+					if [ -n "$LIST_MAIN_BRANCH" ]; then
+					
+						#if [[ "$CURRENT_BRANCH" != "main" ]]; then
+				
+							echo "Checking out \"main\" branch..."
+
+							git checkout -B main heads/main
+							
+						#else
+						
+						#	echo "At \"main\"..."
+							
+						#fi
+
+					else
+
+						LIST_MASTER_BRANCH=$(git branch --list master)
+					
+						if [ -n "$LIST_MASTER_BRANCH" ]; then
+						
+							#if [[ "$CURRENT_BRANCH" != "master" ]]; then
+
+								echo "Checking out \"master\" branch..."
+						
+								git checkout -B master heads/master
+								
+							#else
+							
+							#	echo "At \"master\"..."
+								
+							#fi
+						
+						fi
+						
+					fi
 
                 fi
 
