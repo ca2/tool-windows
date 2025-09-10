@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# check_symbols.sh
+# Checks if debug symbols exist in your built .so libraries
+
+# --- CONFIG ---
+NDK_PATH="${ANDROID_NDK_HOME:-/C/Users/camilo/AppData/Local/Android/Sdk/ndk/27.0.12077973}"  # Fallback if ANDROID_NDK_HOME is not set
+TOOLCHAIN="$NDK_PATH/toolchains/llvm/prebuilt/windows-x86_64/bin"
+READOBJ="$TOOLCHAIN/llvm-readobj.exe"
+
+# --- Locate .so files ---
+SO_DIR="."
+if [ ! -d "$SO_DIR" ]; then
+    echo "❌ No debug build found in $SO_DIR"
+    echo "Make sure you've built the debug variant at least once in Android Studio."
+    exit 1
+fi
+
+echo "🔍 Checking .so files for debug symbols in $SO_DIR"
+echo "Using NDK tools from: $TOOLCHAIN"
+echo
+
+FOUND=0
+for so in $(find "$SO_DIR" -name "*.so"); do
+    FOUND=1
+    if "$READOBJ" --sections "$so" | grep -q '\.debug_info'; then
+        echo "✅ $so : HAS DEBUG SYMBOLS"
+    else
+        echo "⚠️  $so : STRIPPED (no debug symbols)"
+    fi
+done
+
+if [ $FOUND -eq 0 ]; then
+    echo "❌ No .so files found in $SO_DIR"
+fi
