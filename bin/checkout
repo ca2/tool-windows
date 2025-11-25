@@ -171,6 +171,8 @@ submodule()
 }
 
 
+echo -ne "\033]0;checkout $BASEDIR\a"
+
 submodule $BASEDIR
 
 # localtime="$(date +"%Y-%m-%d %H:%M:%S %:z") ($(timedatectl show -p Timezone --value))"
