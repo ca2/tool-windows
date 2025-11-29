@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Ask for the user's name
+echo "I'm going to ask your name..."
+read -p "What is your name? " name
+
+# Ask for the user's age
+echo "I'm going to ask your age..."
+read -p "How old are you? " age
+
+# Output the collected information
+echo "Hello, $name! You are $age years old."

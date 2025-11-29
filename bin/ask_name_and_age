@@ -1,0 +1,6 @@
+#!/bin/bash
+
+application_build_helper --call-ask_name_and_age
+
+
+

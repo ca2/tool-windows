@@ -1,0 +1,79 @@
+#!/bin/sh
+
+###############################################################################
+# Safe silent pushd/popd
+###############################################################################
+pushd() { command pushd "$1" > /dev/null || exit 1; }
+popd()  { command popd       > /dev/null || exit 1; }
+
+###############################################################################
+# Recursively initialize git-flow on a directory
+###############################################################################
+submodule() {
+    local DIR="$1"
+    local line trimmed submodule_path
+
+    # Ensure directory exists
+    if [ ! -d "$DIR" ]; then
+        echo "$DIR is not a directory"
+        return
+    fi
+
+    pushd "$DIR"
+
+    echo "Entering directory $(pwd)"
+
+    # Run git flow init only if code.txt exists
+    if [ -f "$(pwd)/code.txt" ]; then
+        echo ""
+        echo "──────────────────────────────────────────────"
+        echo "Initializing git flow"
+        echo "Directory        : $(pwd)"
+        echo "──────────────────────────────────────────────"
+        echo ""
+        git flow init
+        echo ""
+			# Always recurse into submodules if .gitmodules exists
+			if [ -f ".gitmodules" ]; then
+				while IFS= read -r line; do
+						# Strip leading/trailing whitespace and CR (\r)
+						trimmed=$(printf "%s" "$line" | sed -e 's/^[[:space:]]*//' -e 's/[\r[:space:]]*$//')
+						
+						case "$trimmed" in
+							path\ =\ *)
+								# Extract path, remove any trailing whitespace or CR
+								submodule_path="${trimmed#path = }"
+								submodule_path=$(printf "%s" "$submodule_path" | tr -d '\r')
+
+								# Make path absolute relative to current directory
+								submodule "$(pwd)/$submodule_path"
+								;;
+						esac
+				done < .gitmodules
+			fi
+			
+	 fi
+
+
+
+    popd
+}
+
+###############################################################################
+# ENTRY POINT
+###############################################################################
+if [ -z "$1" ]; then
+    [ ! -d ".git" ] && { echo "You must run this script from a git repository"; exit 1; }
+    BASEDIR=$(pwd)
+else
+    BASEDIR="$1"
+fi
+
+# Optional: set terminal title
+echo -ne "\033]0;flow_init $BASEDIR\a"
+
+# Start processing
+submodule "$BASEDIR"
+
+echo "flow_init $(date +"%Y-%m-%d %H:%M:%S")"
+echo "Done."
