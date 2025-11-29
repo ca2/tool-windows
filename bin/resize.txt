@@ -1,0 +1,11 @@
+mount -u /
+swapon -a
+swapoff /dev/ada0s1b
+gpart delete -i 2 ada0s1
+gpart show ada0s1
+gpart resize -i 1 -s 182452160 ada0s1
+gpart add -t freebsd-swap -s 2G ada0s1
+growfs /dev/ada0s1a
+swapon /dev/ada0s1b
+gpart show ada0s1
+df -h
