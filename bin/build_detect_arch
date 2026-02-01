@@ -1,0 +1,5 @@
+
+
+
+cl detect_arch.c /O2 /MT /Fe:detect_arch.exe
+

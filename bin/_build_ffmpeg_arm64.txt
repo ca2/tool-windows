@@ -1,0 +1,1 @@
+./configure --toolchain=msvc --arch=arm64 --target-os=win64 --enable-shared --disable-static --disable-doc --prefix=/r/ffmpeg-arm64-msvc
