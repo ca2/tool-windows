@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+
+MACHINE_ARCHITECTURE="$(_machine_architecture)"
+
+
+application_build_helper_$MACHINE_ARCHITECTURE "$@"
+
+
+
+     
