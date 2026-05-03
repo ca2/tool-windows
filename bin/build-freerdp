@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+set -e
+
+# ==== CONFIG ====
+INSTALL_DIR="C:/freerdp-build"
+SRC_DIR="$INSTALL_DIR/src"
+BUILD_DIR="$INSTALL_DIR/build"
+INSTALL_PREFIX="$INSTALL_DIR/install"
+
+# ==== PREPARE DIRECTORIES EARLY ====
+echo "Creating directories..."
+mkdir -p "$SRC_DIR" "$BUILD_DIR" "$INSTALL_PREFIX"
+
+# ==== DETECT VISUAL STUDIO ====
+VS_INSTALL_PATH=$(cmd.exe /C "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\\vswhere.exe\" -latest -property installationPath" 2>/dev/null | tr -d '\r')
+
+if [ -z "$VS_INSTALL_PATH" ]; then
+    echo "ERROR: Visual Studio not found. Ensure VS 18 is installed and registered."
+    exit 1
+fi
+
+# ==== DETECT LATEST MSVC TOOLCHAIN ====
+MSVC_ROOT="$VS_INSTALL_PATH/VC/Tools/MSVC"
+if [ ! -d "$MSVC_ROOT" ]; then
+    echo "ERROR: MSVC toolchains not found under $MSVC_ROOT"
+    exit 1
+fi
+
+MSVC_VERSION=$(ls "$MSVC_ROOT" | sort -V | tail -n1)
+VCVARSALL="$VS_INSTALL_PATH/VC/Auxiliary/Build/vcvarsall.bat"
+
+if [ ! -f "$VCVARSALL" ]; then
+    echo "ERROR: vcvarsall.bat not found at $VCVARSALL"
+    exit 1
+fi
+
+echo "Using Visual Studio at: $VS_INSTALL_PATH"
+echo "Using MSVC version: $MSVC_VERSION"
+
+# ==== CLONE FreeRDP ====
+if [ ! -d "$SRC_DIR/FreeRDP" ]; then
+    echo "Cloning FreeRDP..."
+    git clone https://github.com/FreeRDP/FreeRDP.git "$SRC_DIR/FreeRDP"
+else
+    echo "FreeRDP already exists."
+fi
+
+# ==== LOAD MSVC ENVIRONMENT ====
+echo "Loading MSVC environment..."
+ENV_FILE=$(mktemp)
+cmd.exe /C "\"$VCVARSALL\" x64 && set" > "$ENV_FILE"
+
+while IFS='=' read -r key value; do
+    if [ ! -z "$key" ]; then
+        export "$key=$value"
+    fi
+done < "$ENV_FILE"
+rm "$ENV_FILE"
+
+# ==== CHECK TOOLS ====
+command -v cl >/dev/null 2>&1 || { echo "ERROR: cl.exe not found in PATH"; exit 1; }
+command -v cmake >/dev/null 2>&1 || { echo "ERROR: CMake not found in PATH"; exit 1; }
+command -v ninja >/dev/null 2>&1 || { echo "ERROR: Ninja not found in PATH"; exit 1; }
+
+cd "$BUILD_DIR"
+
+# ==== CONFIGURE CMAKE ====
+cmake -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" \
+  -DWITH_CLIENT=ON \
+  -DWITH_SERVER=OFF \
+  -DWITH_TESTS=OFF \
+  "$SRC_DIR/FreeRDP"
+
+# ==== BUILD ====
+cmake --build .
+
+# ==== INSTALL ====
+cmake --install .
+
+echo ""
+echo "====================================="
+echo "Build complete!"
+echo "Installed to: $INSTALL_PREFIX"
+echo "====================================="
