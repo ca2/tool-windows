@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+application_build_helper --copy-prebuilt-libraries
 application_build_helper --prepare-applications
 
 

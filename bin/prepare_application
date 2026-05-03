@@ -12,6 +12,7 @@ PLATFORM=$2
 CONFIGURATION=$3
 
 
+application_build_helper --copy-prebuilt-libraries
 application_build_helper --prepare-application "source/$APPID" $PLATFORM $CONFIGURATION
 
 
