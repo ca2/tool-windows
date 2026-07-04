@@ -1,38 +1,69 @@
 #!/bin/bash
 
+defer_ssh_agent_is_available() {
 
-command -v ssh-agent &> /dev/null
-SSH_AGENT_ERROR=$?
+	ssh-add -l &> /dev/null
+	local status=$?
 
-command -v ssh-add &> /dev/null
-SSH_ADD_ERROR=$?
+	# ssh-add returns 0 when identities are loaded, 1 when the agent is
+	# reachable but empty, and 2 when no usable agent is available.
+	[ $status -eq 0 ] || [ $status -eq 1 ]
 
-SSH_AGENT_SETUP=0
+}
 
-#echo "SSH_AGENT_ERROR=$SSH_AGENT_ERROR"
-#echo "SSH_ADD_ERROR=$SSH_ADD_ERROR"
+defer_ssh_agent_find_existing() {
 
-if [ $SSH_AGENT_ERROR -eq 0 ]; then
+	local socket
 
-	if [ $SSH_ADD_ERROR -eq 0 ]; then
-	
-		#echo "Setting up ssh-agent"
-	
-		eval $(ssh-agent -s) > /dev/null
-		ssh-add ~/.ssh/id_auth &> /dev/null
-		#ssh-add ~/.ssh/id_sign &> /dev/null
-		
-		SSH_AGENT_SETUP=1
-		
-	fi
-	
-fi
+	for socket in /tmp/ssh-*/agent.*; do
 
-if [ $SSH_AGENT_SETUP -eq 0 ]; then
+		[ -S "$socket" ] || continue
+
+		SSH_AUTH_SOCK="$socket"
+		export SSH_AUTH_SOCK
+
+		if defer_ssh_agent_is_available; then
+			return 0
+		fi
+
+	done
+
+	return 1
+
+}
+
+defer_ssh_agent_env_file="$HOME/.ssh-agent.env"
+
+if ! command -v ssh-agent &> /dev/null || ! command -v ssh-add &> /dev/null; then
 
 	echo 'Failed to setup ssh agent'
-	
+
+else
+
+	if [ -f "$defer_ssh_agent_env_file" ]; then
+		. "$defer_ssh_agent_env_file" &> /dev/null
+	fi
+
+	if ! defer_ssh_agent_is_available && ! defer_ssh_agent_find_existing; then
+
+		eval "$(ssh-agent -s)" > /dev/null
+
+		{
+			echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK; export SSH_AUTH_SOCK"
+			echo "SSH_AGENT_PID=$SSH_AGENT_PID; export SSH_AGENT_PID"
+		} > "$defer_ssh_agent_env_file"
+		chmod 600 "$defer_ssh_agent_env_file" &> /dev/null
+
+		if [ -f "$HOME/.ssh/id_auth" ]; then
+			ssh-add "$HOME/.ssh/id_auth" &> /dev/null
+		fi
+		#ssh-add ~/.ssh/id_sign &> /dev/null
+
+	fi
+
 fi
 
+unset -f defer_ssh_agent_is_available defer_ssh_agent_find_existing
+unset defer_ssh_agent_env_file
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-application_build_helper -generate_documentation
+application_build_helper --generate-documentation
 
 
 
