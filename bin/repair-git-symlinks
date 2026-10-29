@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+# Repair Git symlink placeholders in a repository and initialized submodules.
+set -u
+
+usage() {
+  cat <<'USAGE'
+Usage: repair-git-symlinks [--apply] [--root PATH]
+
+Default: preview only. --apply enables repair.
+Uses the index (mode 120000) and skips changed placeholder files.
+USAGE
+}
+
+apply=0
+root=.
+while (( $# )); do
+  case "$1" in
+    --apply) apply=1; shift ;;
+    --root)
+      if (( $# < 2 )); then echo "Missing value for --root" >&2; exit 2; fi
+      root=$2; shift 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown option: $1" >&2; usage >&2; exit 2 ;;
+  esac
+done
+
+root=$(git -C "$root" rev-parse --show-toplevel) || exit 1
+repaired=0
+would_repair=0
+skipped=0
+failed=0
+repos=0
+
+repair_repo() {
+  local repo=$1
+  local record mode oid stage path full actual backup submodule
+  ((repos+=1))
+  printf '\nRepository: %s\n' "$repo"
+
+  if (( apply )); then
+    if ! git -C "$repo" config --local core.symlinks true; then
+      printf 'ERROR: cannot configure core.symlinks in %s\n' "$repo" >&2
+      ((failed+=1))
+      return
+    fi
+  fi
+
+  # process substitution keeps counters in this shell (unlike a pipe).
+  while IFS= read -r -d '' record; do
+    # Format: <mode> <oid> <stage><TAB><path>
+    [[ "$record" == *$'\t'* ]] || continue
+    path=${record#*$'\t'}
+    record=${record%%$'\t'*}
+    read -r mode oid stage <<< "$record"
+    full="$repo/$path"
+
+    case "$mode" in
+      160000)
+        # Uninitialized submodules are skipped, not cloned.
+        if [[ -d "$full" ]] &&
+           [[ "$(git -C "$full" rev-parse --show-toplevel 2>/dev/null)" == "$full" ]]; then
+          repair_repo "$full"
+        else
+          printf 'SKIP uninitialized submodule: %s\n' "$full"
+        fi
+        ;;
+      120000)
+        # A dangling *real* symlink is still a valid symlink.
+        [[ -L "$full" ]] && continue
+        [[ -e "$full" ]] || continue
+        if [[ ! -f "$full" ]]; then
+          printf 'SKIP non-file: %s\n' "$full"
+          ((skipped+=1))
+          continue
+        fi
+
+        # Exclude unmerged entries: only stage 0 is safe to restore.
+        if [[ "$stage" != 0 ]]; then
+          printf 'SKIP unmerged index entry: %s\n' "$full"
+          ((skipped+=1))
+          continue
+        fi
+
+        actual=$(git -C "$repo" hash-object --no-filters -- "$path") || {
+          printf 'SKIP cannot hash: %s\n' "$full"
+          ((skipped+=1))
+          continue
+        }
+        if [[ "$actual" != "$oid" ]]; then
+          printf 'SKIP modified placeholder: %s\n' "$full"
+          ((skipped+=1))
+          continue
+        fi
+
+        if (( !apply )); then
+          printf 'WOULD REPAIR: %s\n' "$full"
+          ((would_repair+=1))
+          continue
+        fi
+
+        # Keep a temporary backup until restoration is verified.
+        backup=$(mktemp "${full}.symlink-backup.XXXXXXXX") || {
+          printf 'ERROR creating backup path: %s\n' "$full" >&2
+          ((failed+=1))
+          continue
+        }
+        # mktemp creates a file; mv must replace it.
+        if ! mv -f -- "$full" "$backup"; then
+          rm -f -- "$backup"
+          printf 'ERROR backing up: %s\n' "$full" >&2
+          ((failed+=1))
+          continue
+        fi
+
+        if git -C "$repo" -c core.symlinks=true restore --worktree -- "$path" && [[ -L "$full" ]]; then
+          rm -f -- "$backup"
+          printf 'REPAIRED: %s\n' "$full"
+          ((repaired+=1))
+        else
+          # Remove an incorrectly recreated regular file, but never delete
+          # a newly created symlink when recovering a failed repair.
+          if [[ -L "$full" ]]; then
+            printf 'ERROR unexpected symlink state; backup retained: %s\n' "$backup" >&2
+          elif [[ ! -e "$full" || -f "$full" ]]; then
+            [[ -e "$full" ]] && rm -f -- "$full"
+            if mv -- "$backup" "$full"; then
+              printf 'ERROR repair failed, placeholder restored: %s\n' "$full" >&2
+            else
+              printf 'ERROR restore backup manually: %s\n' "$backup" >&2
+            fi
+          else
+            printf 'ERROR unexpected path type; backup retained: %s\n' "$backup" >&2
+          fi
+          ((failed+=1))
+        fi
+        ;;
+    esac
+  done < <(git -C "$repo" ls-files --stage -z)
+}
+
+repair_repo "$root"
+printf '\nRepositories: %d | Repaired: %d | Would repair: %d | Skipped: %d | Failed: %d\n' \
+  "$repos" "$repaired" "$would_repair" "$skipped" "$failed"
+if (( !apply )); then
+  printf 'Preview only. Run with --apply to repair.\n'
+fi
+(( failed == 0 ))
