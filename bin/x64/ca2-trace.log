@@ -1,0 +1,1744 @@
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:10:25 870
+test group "main_self_test" took 1e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+pplatform->get_argument1(0) : --copy-prebuilt-libraries
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:10:27 298
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+pplatform->get_argument1(0) : --prepare-applications
+prepare_application: component_implementation:app/wallpaper_transform_system_summary
+safe_create_file : CreateFileW failed \\?\H:\Users\camilo\windows_xp\main\source\component_implementation:app\.deployignore 123 dwDesiredAccess=2147483648 dwShareMode=3 lpSecurityAttributes=0x0 dwCreationDisposition=3 dwFlagsAndAttributes=128 hTemplateFile=0x0 "The filename, directory name, or volume label syntax is incorrect.
+"
+prepare_application: app/app
+prepare_application: app/just_message_box
+prepare_application: app/just_acme_message_box
+prepare_application: app/just_apex_message_box
+prepare_application: app/just_aqua_message_box
+prepare_application: app/just_aura_message_box
+prepare_application: app/message_box
+prepare_application: app/shader
+prepare_application: app-simple/about_the_operating_system
+prepare_application: app-simple/application
+prepare_application: app-simple/box
+prepare_application: app-simple/build_plan
+prepare_application: app-simple/drawing
+prepare_application: app-simple/http
+prepare_application: app-simple/http_file_server
+http_
+prepare_application: app-simple/nanoui_example
+prepare_application: app-simple/networking_application
+prepare_application: app-simple/nfs_desktop
+prepare_application: app-simple/notify_drawing
+prepare_application: app-simple/shader
+prepare_application: app-simple/change_grub_default_entry
+prepare_application: app-simple/form
+prepare_application: app-simple/shortcut_amender
+prepare_application: app-complex/drawing
+prepare_application: app-complex/form
+prepare_application: app-complex/video_capture
+prepare_application: game/light
+prepare_application: app-core/ambient
+prepare_application: app-core/hello_animation
+prepare_application: app-core/hello_multiverse
+prepare_application: app-cidadedecuritiba/alphaclock
+prepare_application: app-core/flag
+prepare_application: app-core/clockverse
+prepare_application: app-core/projection
+prepare_application: app-core/desk
+prepare_application: app-core/desk_deskband_control
+prepare_application: app-core/weather
+prepare_application: app-core/alarm
+prepare_application: app-core/audioaura
+prepare_application: app-core/audio_recorder
+prepare_application: app-core/auraclick
+prepare_application: app-core/auratype
+prepare_application: app-core/chronometer
+prepare_application: app-core/timer
+prepare_application: app-core/todo
+prepare_application: app-veriwell/waven
+prepare_application: app-veriwell/verisimplevideo
+prepare_application: app-veriwell/musical_player_lite
+prepare_application: app-veriwell/musical_player
+prepare_application: app-veriwell/keyboard
+prepare_application: app-core/addressbook
+prepare_application: app-core/calculator
+prepare_application: app-core/file_manager
+prepare_application: app-core/file_rename
+prepare_application: app-core/fuel-memory-opengl
+prepare_application: app-core/fuel-memory-vulkan
+prepare_application: app-core/fuel-window-opengl
+prepare_application: app-core/fuel-window-vulkan
+prepare_application: app-core/font_list
+prepare_application: app-core/google_fonts
+prepare_application: app-core/hash_hub
+prepare_application: app-core/plain_text
+prepare_application: app-core/photo
+prepare_application: app-core/picture
+prepare_application: app-core/store
+prepare_application: design/biteditor
+prepare_application: design/composite
+prepare_application: design/design
+prepare_application: design/text
+prepare_application: design/text_format
+prepare_application: game/csgomatchmaking
+prepare_application: game/game_of_life
+prepare_application: game/tictactoe
+prepare_application: game/quadsquare
+prepare_application: game/arkanoid
+prepare_application: game/sokoban
+prepare_application: game/pacman
+prepare_application: game/particle
+prepare_application: game/coincube
+prepare_application: game/arch001
+prepare_application: resident/resident_desktop
+prepare_application: tranquillum/composite
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:10:33 664
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+pplatform->get_argument1(0) : --package
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/wallpaper_transform_system_summary/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/app/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/just_acme_message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/just_apex_message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/just_aqua_message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/just_aura_message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/shader/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/about_the_operating_system/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/application/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/build_plan/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/drawing/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/http/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/http_file_server/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/nanoui_example/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/networking_application/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/nfs_desktop/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/notify_drawing/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/shader/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/change_grub_default_entry/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/form/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/shortcut_amender/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-complex/drawing/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-complex/form/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-complex/video_capture/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/light/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/ambient/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/hello_animation/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/hello_multiverse/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-cidadedecuritiba/alphaclock/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/flag/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/clockverse/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/projection/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/desk/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/desk_deskband_control/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/weather/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/alarm/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/audioaura/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/audio_recorder/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/auraclick/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/auratype/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/chronometer/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/timer/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/todo/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/waven/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/verisimplevideo/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/musical_player_lite/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/musical_player/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/keyboard/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/addressbook/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/calculator/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/file_manager/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/file_rename/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/font_list/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/google_fonts/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/hash_hub/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/plain_text/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/photo/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/picture/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/store/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/biteditor/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/composite/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/design/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/text/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/text_format/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/csgomatchmaking/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/game_of_life/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/tictactoe/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/quadsquare/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/arkanoid/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/sokoban/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/pacman/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/particle/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/coincube/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/arch001/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/resident/resident_desktop/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/tranquillum/composite/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+Summary of missing files while trying to copy application output:
+Missing file 00001 : _app_core_audio_recorder.exe
+Missing file 00002 : _app_core_desk_deskband_control.exe
+Missing file 00003 : _app_core_file_rename.exe
+Missing file 00004 : _app_core_font_list.exe
+Missing file 00005 : _app_core_google_fonts.exe
+Missing file 00006 : _app_core_hello_animation.exe
+Missing file 00007 : _app_shader.exe
+Missing file 00008 : _app_simple_build_plan.exe
+Missing file 00009 : _app_simple_nfs_desktop.exe
+Missing file 00010 : _app_simple_shader.exe
+Missing file 00011 : _app_simple_shortcut_amender.exe
+Missing file 00012 : _design_composite.exe
+Missing file 00013 : _design_text.exe
+Missing file 00014 : app_core_audio_recorder.dll
+Missing file 00015 : app_core_desk_deskband.dll
+Missing file 00016 : app_core_desk_deskband_control.dll
+Missing file 00017 : app_core_file_rename.dll
+Missing file 00018 : app_core_font_list.dll
+Missing file 00019 : app_core_google_fonts.dll
+Missing file 00020 : app_core_hello_animation.dll
+Missing file 00021 : app_shader.dll
+Missing file 00022 : app_simple_build_plan.dll
+Missing file 00023 : app_simple_nfs_desktop.dll
+Missing file 00024 : app_simple_shader.dll
+Missing file 00025 : app_simple_shortcut_amender.dll
+Missing file 00026 : assimp.dll
+Missing file 00027 : design_text.dll
+Missing file 00028 : fs_raw_folder_protocol_google_drive.dll
+Missing file 00029 : glad.dll
+Missing file 00030 : gpu_opengl.dll
+Missing file 00031 : just_message_box.dll
+Missing file 00032 : ktx.dll
+Missing file 00033 : libx264-164.dll
+Missing file 00034 : libx265.dll
+Missing file 00035 : nano_idn_windows_common.dll
+Missing file 00036 : video_input_media_foundation.dll
+--End of summary of missing files while trying to copy application output.
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:20:02 178
+test group "main_self_test" took 1e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+pplatform->get_argument1(0) : --copy-prebuilt-libraries
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:20:03 627
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+pplatform->get_argument1(0) : --prepare-applications
+prepare_application: component_implementation:app/wallpaper_transform_system_summary
+safe_create_file : CreateFileW failed \\?\H:\Users\camilo\windows_xp\main\source\component_implementation:app\.deployignore 123 dwDesiredAccess=2147483648 dwShareMode=3 lpSecurityAttributes=0x0 dwCreationDisposition=3 dwFlagsAndAttributes=128 hTemplateFile=0x0 "The filename, directory name, or volume label syntax is incorrect.
+"
+prepare_application: app/app
+prepare_application: app/just_message_box
+prepare_application: app/just_acme_message_box
+prepare_application: app/just_apex_message_box
+prepare_application: app/just_aqua_message_box
+prepare_application: app/just_aura_message_box
+prepare_application: app/message_box
+prepare_application: app/shader
+prepare_application: app-simple/about_the_operating_system
+prepare_application: app-simple/application
+prepare_application: app-simple/box
+prepare_application: app-simple/build_plan
+prepare_application: app-simple/drawing
+prepare_application: app-simple/http
+prepare_application: app-simple/http_file_server
+http_
+prepare_application: app-simple/nanoui_example
+prepare_application: app-simple/networking_application
+prepare_application: app-simple/nfs_desktop
+prepare_application: app-simple/notify_drawing
+prepare_application: app-simple/shader
+prepare_application: app-simple/change_grub_default_entry
+prepare_application: app-simple/form
+prepare_application: app-simple/shortcut_amender
+prepare_application: app-complex/drawing
+prepare_application: app-complex/form
+prepare_application: app-complex/video_capture
+prepare_application: game/light
+prepare_application: app-core/ambient
+prepare_application: app-core/hello_animation
+prepare_application: app-core/hello_multiverse
+prepare_application: app-cidadedecuritiba/alphaclock
+prepare_application: app-core/flag
+prepare_application: app-core/clockverse
+prepare_application: app-core/projection
+prepare_application: app-core/desk
+prepare_application: app-core/desk_deskband_control
+prepare_application: app-core/weather
+prepare_application: app-core/alarm
+prepare_application: app-core/audioaura
+prepare_application: app-core/audio_recorder
+prepare_application: app-core/auraclick
+prepare_application: app-core/auratype
+prepare_application: app-core/chronometer
+prepare_application: app-core/timer
+prepare_application: app-core/todo
+prepare_application: app-veriwell/waven
+prepare_application: app-veriwell/verisimplevideo
+prepare_application: app-veriwell/musical_player_lite
+prepare_application: app-veriwell/musical_player
+prepare_application: app-veriwell/keyboard
+prepare_application: app-core/addressbook
+prepare_application: app-core/calculator
+prepare_application: app-core/file_manager
+prepare_application: app-core/file_rename
+prepare_application: app-core/fuel-memory-opengl
+prepare_application: app-core/fuel-memory-vulkan
+prepare_application: app-core/fuel-window-opengl
+prepare_application: app-core/fuel-window-vulkan
+prepare_application: app-core/font_list
+prepare_application: app-core/google_fonts
+prepare_application: app-core/hash_hub
+prepare_application: app-core/plain_text
+prepare_application: app-core/photo
+prepare_application: app-core/picture
+prepare_application: app-core/store
+prepare_application: design/biteditor
+prepare_application: design/composite
+prepare_application: design/design
+prepare_application: design/text
+prepare_application: design/text_format
+prepare_application: game/csgomatchmaking
+prepare_application: game/game_of_life
+prepare_application: game/tictactoe
+prepare_application: game/quadsquare
+prepare_application: game/arkanoid
+prepare_application: game/sokoban
+prepare_application: game/pacman
+prepare_application: game/particle
+prepare_application: game/coincube
+prepare_application: game/arch001
+prepare_application: resident/resident_desktop
+prepare_application: tranquillum/composite
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:20:09 675
+test group "main_self_test" took 3e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+pplatform->get_argument1(0) : --package
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/wallpaper_transform_system_summary/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/app/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/just_acme_message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/just_apex_message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/just_aqua_message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/just_aura_message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/message_box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app/shader/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/about_the_operating_system/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/application/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/box/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/build_plan/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/drawing/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/http/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/http_file_server/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/nanoui_example/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/networking_application/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/nfs_desktop/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/notify_drawing/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/shader/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/change_grub_default_entry/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/form/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-simple/shortcut_amender/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-complex/drawing/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-complex/form/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-complex/video_capture/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/light/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/ambient/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/hello_animation/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/hello_multiverse/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-cidadedecuritiba/alphaclock/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/flag/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/clockverse/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/projection/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/desk/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/desk_deskband_control/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/weather/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/alarm/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/audioaura/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/audio_recorder/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/auraclick/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/auratype/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/chronometer/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/timer/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/todo/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/waven/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/verisimplevideo/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/musical_player_lite/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/musical_player/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-veriwell/keyboard/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/addressbook/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/calculator/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/file_manager/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/file_rename/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/font_list/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/google_fonts/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/hash_hub/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/plain_text/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/photo/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/picture/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/app-core/store/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/biteditor/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/composite/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/design/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/text/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/design/text_format/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/csgomatchmaking/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/game_of_life/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/tictactoe/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/quadsquare/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/arkanoid/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/sokoban/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/pacman/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/particle/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/coincube/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/game/arch001/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/resident/resident_desktop/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+application_build_helper::get_application_file_list strSystemAmbientReleaseArchitecture: windows/Win32
+Packages listing (file path) : H:/Users/camilo/windows_xp/main/source/tranquillum/composite/_____operating_system/windows/Win32/_packages.txt
+application_build_helper::package pathBinaries: H:/Users/camilo/windows_xp/main/cmake-build-release-mingw-windows_xp/output
+Summary of missing files while trying to copy application output:
+Missing file 00001 : _app_core_audio_recorder.exe
+Missing file 00002 : _app_core_desk_deskband_control.exe
+Missing file 00003 : _app_core_file_rename.exe
+Missing file 00004 : _app_core_font_list.exe
+Missing file 00005 : _app_core_google_fonts.exe
+Missing file 00006 : _app_core_hello_animation.exe
+Missing file 00007 : _app_shader.exe
+Missing file 00008 : _app_simple_build_plan.exe
+Missing file 00009 : _app_simple_nfs_desktop.exe
+Missing file 00010 : _app_simple_shader.exe
+Missing file 00011 : _app_simple_shortcut_amender.exe
+Missing file 00012 : _design_composite.exe
+Missing file 00013 : _design_text.exe
+Missing file 00014 : app_core_audio_recorder.dll
+Missing file 00015 : app_core_desk_deskband.dll
+Missing file 00016 : app_core_desk_deskband_control.dll
+Missing file 00017 : app_core_file_rename.dll
+Missing file 00018 : app_core_font_list.dll
+Missing file 00019 : app_core_google_fonts.dll
+Missing file 00020 : app_core_hello_animation.dll
+Missing file 00021 : app_shader.dll
+Missing file 00022 : app_simple_build_plan.dll
+Missing file 00023 : app_simple_nfs_desktop.dll
+Missing file 00024 : app_simple_shader.dll
+Missing file 00025 : app_simple_shortcut_amender.dll
+Missing file 00026 : assimp.dll
+Missing file 00027 : design_text.dll
+Missing file 00028 : fs_raw_folder_protocol_google_drive.dll
+Missing file 00029 : glad.dll
+Missing file 00030 : gpu_opengl.dll
+Missing file 00031 : just_message_box.dll
+Missing file 00032 : ktx.dll
+Missing file 00033 : libx264-164.dll
+Missing file 00034 : libx265.dll
+Missing file 00035 : video_input_media_foundation.dll
+--End of summary of missing files while trying to copy application output.
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:42:53 673
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+pplatform->get_argument1(0) : --defer-prepare-folder
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:42:58 655
+test group "main_self_test" took 3e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:42:58 710
+test group "main_self_test" took 1e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:42:58 816
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 01:43:03 753
+test group "main_self_test" took 6e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+pplatform->get_argument1(0) : --defer-prepare-folder
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:11:46 066
+test group "main_self_test" took 6e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-checkout
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:12:09 926
+test group "main_self_test" took 4e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-checkout
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:12:19 627
+test group "main_self_test" took 3e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-checkout
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:12:32 421
+test group "main_self_test" took 4e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-recurse-submodules
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:18:40 545
+test group "main_self_test" took 6e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-checkout
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:18:54 121
+test group "main_self_test" took 5e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-checkout
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:19:10 343
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-recurse-submodules
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:19:29 448
+test group "main_self_test" took 3e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-recurse-submodules
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:42:28 037
+test group "main_self_test" took 3e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-checkout
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:42:34 226
+test group "main_self_test" took 1e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-checkout
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:42:49 221
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-recurse-submodules
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:42:53 087
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-recurse-submodules
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:58:22 818
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-recurse-submodules
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 02:58:27 160
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-recurse-submodules
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 04:18:29 119
+test group "main_self_test" took 3e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-checkout
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)
+startup: platform::application::initialize_application: before set_platform()
+startup: platform::application::initialize_application: after set_platform()
+library::create_factory "acme_windows": starting...
+Factory has succeeded for library : "acme_windows"
+Start Time: 2026-10-17 04:18:46 244
+test group "main_self_test" took 2e-04 ms
+directory_system::init_system strAppId : integration/application_build_helper
+m_pathAppData : C:/Users/camilo/application
+startup: platform::application::process_init: enter
+startup: platform::application::process_init: before initialize_context()
+startup: platform::application::process_init: after initialize_context()
+startup: platform::application::process_init: before stra.explode("/", m_strAppId)
+startup: platform::application::process_init: after stra.explode("/", m_strAppId)
+startup: platform::application::process_init: before m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: after m_strDomain = stra.slice(1).implode("/")
+startup: platform::application::process_init: before add_matter_locator(this)
+startup: platform::application::process_init: after add_matter_locator(this)
+startup: platform::application::process_init: leave
+startup: platform::application::init_application: enter
+startup: platform::application::init_application: before auto psystem = system()
+startup: platform::application::init_application: after auto psystem = system()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init1()
+startup: platform::application::init_application: after init1()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init2()
+startup: platform::application::init_application: after init2()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init3()
+startup: platform::application::init_application: after init3()
+startup: platform::application::init_application: before ping()
+startup: platform::application::init_application: after ping()
+startup: platform::application::init_application: before init()
+startup: platform::application::init_application: after init()
+startup: platform::application::init_application: leave
+--git-recurse-submodules
+Task "platform::system" has finishing flag.
+platform::system::~system() (start)
+platform::system::~system() (destroyed)

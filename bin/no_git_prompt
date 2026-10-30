@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Apply to the current Git Bash session:
+#   source no_git_prompt
+# For future sessions, add this to ~/.bash_profile:
+#   source "$HOME/code/operating_system/tool/bin/no_git_prompt"
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    printf '%s\n' 'Use: source no_git_prompt (the prompt belongs to the current shell).' >&2
+    exit 2
+fi
+
+# No command substitution or leading blank line: drawing this prompt uses only
+# Bash's built-in prompt expansion, including the current working directory.
+export PS1='\[\033]0;${MSYSTEM:-Bash}:\w\007\]\[\033[32m\]\u@\h \[\033[35m\]${MSYSTEM:-Bash} \[\033[33m\]\w\[\033[0m\]\n\$ '

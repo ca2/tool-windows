@@ -1,0 +1,9 @@
+#!/bin/bash
+
+find . -type f \( -iname '*.exe' -o -iname '*.dll' \) -print0 |
+while IFS= read -r -d '' file; do
+    if objdump -p "$file" 2>/dev/null |
+       grep -q 'GetDynamicTimeZoneInformation'; then
+        echo "FOUND: $file"
+    fi
+done
