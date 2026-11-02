@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+
+application_build_helper --create-shortcut-executables
+
+
+
