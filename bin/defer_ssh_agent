@@ -40,29 +40,40 @@ if ! command -v ssh-agent &> /dev/null || ! command -v ssh-add &> /dev/null; the
 
 else
 
-	if [ -f "$defer_ssh_agent_env_file" ]; then
+	# Keep a working inherited agent; a saved environment may be stale.
+	if ! defer_ssh_agent_is_available && [ -f "$defer_ssh_agent_env_file" ]; then
 		. "$defer_ssh_agent_env_file" &> /dev/null
 	fi
 
 	if ! defer_ssh_agent_is_available && ! defer_ssh_agent_find_existing; then
 
-		eval "$(ssh-agent -s)" > /dev/null
-
-		{
-			echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK; export SSH_AUTH_SOCK"
-			echo "SSH_AGENT_PID=$SSH_AGENT_PID; export SSH_AGENT_PID"
-		} > "$defer_ssh_agent_env_file"
-		chmod 600 "$defer_ssh_agent_env_file" &> /dev/null
-
-		if [ -f "$HOME/.ssh/id_auth" ]; then
-			ssh-add "$HOME/.ssh/id_auth" &> /dev/null
+		if eval "$(ssh-agent -s)" > /dev/null && defer_ssh_agent_is_available; then
+			(umask 077
+				printf 'export SSH_AUTH_SOCK=%q\nexport SSH_AGENT_PID=%q\n' \
+					"$SSH_AUTH_SOCK" "${SSH_AGENT_PID:-}" > "$defer_ssh_agent_env_file"
+			)
+		else
+			printf '%s\n' 'Failed to start a usable SSH agent.' >&2
 		fi
-		#ssh-add ~/.ssh/id_sign &> /dev/null
 
+	fi
+
+	# Reused agents may be empty too, including after a reboot.
+	ssh-add -l > /dev/null 2>&1
+	defer_ssh_agent_status=$?
+	if [ "$defer_ssh_agent_status" -eq 1 ]; then
+		if [ -f "$HOME/.ssh/id_auth" ]; then
+			ssh-add "$HOME/.ssh/id_auth" || printf '%s\n' 'Failed to load ~/.ssh/id_auth into the SSH agent.' >&2
+		else
+			ssh-add || printf '%s\n' 'No SSH key loaded. Add your GitHub key with: ssh-add /path/to/private_key' >&2
+		fi
+	elif [ "$defer_ssh_agent_status" -ne 0 ]; then
+		printf '%s\n' 'No usable SSH agent is available.' >&2
 	fi
 
 fi
 
+unset defer_ssh_agent_status
 unset -f defer_ssh_agent_is_available defer_ssh_agent_find_existing
 unset defer_ssh_agent_env_file
 

@@ -36,15 +36,7 @@ done
 export PATH
 unset tool_bin
 
-if [ -z "${SSH_AUTH_SOCK:-}" ]; then
-
-   if [ -f "$HOME/code/operating_system/tool/bin/defer_ssh_agent" ]; then
-
-      . "$HOME/code/operating_system/tool/bin/defer_ssh_agent"
-
-   fi
-
+# Validate even an inherited socket: it may refer to an agent from an old session.
+if [ -f "$HOME/code/operating_system/tool/bin/defer_ssh_agent" ]; then
+   . "$HOME/code/operating_system/tool/bin/defer_ssh_agent"
 fi
-
-
-
