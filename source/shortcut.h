@@ -45,15 +45,7 @@ inline int run_application_build_helper_shortcut(const wchar_t * option, int arg
    std::wstring helper(module, length);
    auto slash = helper.find_last_of(L"\\/");
    helper.resize(slash + 1);
-#if defined(_M_ARM64)
-   helper += L"arm64\\application_build_helper.exe";
-#elif defined(_M_X64)
-   helper += L"x64\\application_build_helper.exe";
-#elif defined(_M_IX86)
-   helper += L"win32\\application_build_helper.exe";
-#else
-#error Unsupported shortcut executable architecture.
-#endif
+   helper += L"application_build_helper.exe";
 
    std::wstring command = shortcut_quote(helper.c_str()) + L" " + shortcut_quote(option);
    for (int i = 1; i < argc; ++i)

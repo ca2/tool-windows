@@ -1,0 +1,50 @@
+
+if [ -z "${__SYSTEM:-}" ]; then
+
+   . "$HOME/application/integration/code/.operating_system_summary"
+
+   # envbasename=`basename $SHELL`
+
+   # ENV="$HOME/.${envbasename}rc"
+
+   # export ENV
+
+   export __SYSTEM
+   export __SYSTEM_FAMILY
+   export __SYSTEM_BRANCH
+   export __SYSTEM_RELEASE
+   export __SYSTEM_ARCHITECTURE
+   export __SYSTEM_SUDO_INSTALL
+   export __SYSTEM_AMBIENT_RELEASE_ARCHITECTURE
+   export __AMBIENT
+
+
+
+fi
+
+# Git Bash uses POSIX paths and colon-separated PATH entries.
+for tool_bin in "$HOME/bin" "$HOME/code/operating_system/tool/bin" "$HOME/code/operating_system/tool/bin/${__SYSTEM_ARCHITECTURE:-}" "$HOME/code/operating_system/tool/posix/bin"; do
+
+   if [ -d "$tool_bin" ]; then
+      case ":$PATH:" in
+         *":$tool_bin:"*) ;;
+         *) PATH="$tool_bin:$PATH" ;;
+      esac
+   fi
+
+done
+export PATH
+unset tool_bin
+
+if [ -z "${SSH_AUTH_SOCK:-}" ]; then
+
+   if [ -f "$HOME/code/operating_system/tool/bin/defer_ssh_agent" ]; then
+
+      . "$HOME/code/operating_system/tool/bin/defer_ssh_agent"
+
+   fi
+
+fi
+
+
+

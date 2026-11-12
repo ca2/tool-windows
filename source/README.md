@@ -11,11 +11,11 @@ this repository at `~/code/operating_system/tool`.
 Alternatively, from this repository's root in an MSVC developer command prompt:
 
 ```bat
-cl /nologo /O2 /MT /EHsc /std:c++17 source\new_release_time.cpp /Febin\new_release_time.exe /Fo%TEMP%\new_release_time.obj
+cl /nologo /O2 /MT /EHsc /std:c++17 source\new_release_time.cpp /Febin\x64\new_release_time.exe /Fo%TEMP%\new_release_time.obj
 ```
 
-The shortcut finds `bin/<architecture>/application_build_helper.exe` relative to
-its own location, inherits the working directory and standard streams, forwards
+The shortcut finds `application_build_helper.exe` beside its own executable in
+`bin/<architecture>`, inherits the working directory and standard streams, forwards
 extra arguments, waits for completion, and returns the helper's exit code.
 It requires no framework libraries. Its direct Windows API calls exist on XP;
 the MSVC runtime and generated executables have been validated on recent Windows.
