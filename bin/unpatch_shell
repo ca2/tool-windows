@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 
-ARCHITECTURE=$(uname -m)
+. "$(dirname "$0")/_library"
 
 
 
 
 
-$HOME/code/operating_system/tool/bin/$ARCHITECTURE/application_build_helper --patch-shell
+$HOME/code/operating_system/tool/bin/$ARCHITECTURE/application_build_helper --unpatch-shell

@@ -1,0 +1,5 @@
+ARCHITECTURE=$(uname -m)
+
+if [ "$ARCHITECTURE" = "x86_64" ]; then
+    ARCHITECTURE=x64
+fi
