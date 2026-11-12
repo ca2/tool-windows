@@ -30,3 +30,8 @@ done
 export PATH
 unset tool_bin
 
+
+# Login shells must initialize the agent even when they do not source .bashrc.
+if [ -f "$HOME/code/operating_system/tool/bin/defer_ssh_agent" ]; then
+   . "$HOME/code/operating_system/tool/bin/defer_ssh_agent"
+fi

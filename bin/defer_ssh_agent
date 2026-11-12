@@ -2,7 +2,7 @@
 
 defer_ssh_agent_is_available() {
 
-	ssh-add -l &> /dev/null
+	"$defer_ssh_agent_add" -l &> /dev/null
 	local status=$?
 
 	# ssh-add returns 0 when identities are loaded, 1 when the agent is
@@ -32,9 +32,34 @@ defer_ssh_agent_find_existing() {
 
 }
 
+# Select agent tools from the same OpenSSH installation as ssh itself.
+defer_ssh_agent_ssh=$(command -v ssh)
+defer_ssh_agent_directory=${defer_ssh_agent_ssh%/*}
+defer_ssh_agent_add=ssh-add
+defer_ssh_agent_agent=ssh-agent
+if [ -x "$defer_ssh_agent_directory/ssh-add.exe" ] && [ -x "$defer_ssh_agent_directory/ssh-agent.exe" ]; then
+   defer_ssh_agent_add="$defer_ssh_agent_directory/ssh-add.exe"
+   defer_ssh_agent_agent="$defer_ssh_agent_directory/ssh-agent.exe"
+elif [ -x "$defer_ssh_agent_directory/ssh-add" ] && [ -x "$defer_ssh_agent_directory/ssh-agent" ]; then
+   defer_ssh_agent_add="$defer_ssh_agent_directory/ssh-add"
+   defer_ssh_agent_agent="$defer_ssh_agent_directory/ssh-agent"
+fi
+
+# Native Git launched by application_build_helper must use the shell's SSH.
+# Preserve explicit user choices of SSH command or executable.
+case "${MSYSTEM:-}" in
+   MINGW*|UCRT*|CLANG*|MSYS)
+      if [ -z "${GIT_SSH_COMMAND:-}" ] && [ -z "${GIT_SSH:-}" ] && [ -n "$defer_ssh_agent_ssh" ]; then
+         defer_ssh_agent_native_ssh=$(cygpath -m "$defer_ssh_agent_ssh")
+         printf -v GIT_SSH_COMMAND '%q' "$defer_ssh_agent_native_ssh"
+         export GIT_SSH_COMMAND
+      fi
+      ;;
+esac
+
 defer_ssh_agent_env_file="$HOME/.ssh-agent.env"
 
-if ! command -v ssh-agent &> /dev/null || ! command -v ssh-add &> /dev/null; then
+if ! command -v "$defer_ssh_agent_agent" &> /dev/null || ! command -v "$defer_ssh_agent_add" &> /dev/null; then
 
 	echo 'Failed to setup ssh agent'
 
@@ -47,7 +72,7 @@ else
 
 	if ! defer_ssh_agent_is_available && ! defer_ssh_agent_find_existing; then
 
-		if eval "$(ssh-agent -s)" > /dev/null && defer_ssh_agent_is_available; then
+		if eval "$("$defer_ssh_agent_agent" -s)" > /dev/null && defer_ssh_agent_is_available; then
 			(umask 077
 				printf 'export SSH_AUTH_SOCK=%q\nexport SSH_AGENT_PID=%q\n' \
 					"$SSH_AUTH_SOCK" "${SSH_AGENT_PID:-}" > "$defer_ssh_agent_env_file"
@@ -59,13 +84,13 @@ else
 	fi
 
 	# Reused agents may be empty too, including after a reboot.
-	ssh-add -l > /dev/null 2>&1
+	"$defer_ssh_agent_add" -l > /dev/null 2>&1
 	defer_ssh_agent_status=$?
 	if [ "$defer_ssh_agent_status" -eq 1 ]; then
 		if [ -f "$HOME/.ssh/id_auth" ]; then
-			ssh-add "$HOME/.ssh/id_auth" || printf '%s\n' 'Failed to load ~/.ssh/id_auth into the SSH agent.' >&2
+			"$defer_ssh_agent_add" "$HOME/.ssh/id_auth" || printf '%s\n' 'Failed to load ~/.ssh/id_auth into the SSH agent.' >&2
 		else
-			ssh-add || printf '%s\n' 'No SSH key loaded. Add your GitHub key with: ssh-add /path/to/private_key' >&2
+			"$defer_ssh_agent_add" || printf '%s\n' 'No SSH key loaded. Add your GitHub key with: ssh-add /path/to/private_key' >&2
 		fi
 	elif [ "$defer_ssh_agent_status" -ne 0 ]; then
 		printf '%s\n' 'No usable SSH agent is available.' >&2
@@ -78,3 +103,4 @@ unset -f defer_ssh_agent_is_available defer_ssh_agent_find_existing
 unset defer_ssh_agent_env_file
 
 
+unset defer_ssh_agent_ssh defer_ssh_agent_directory defer_ssh_agent_add defer_ssh_agent_agent defer_ssh_agent_native_ssh
