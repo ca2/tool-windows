@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+. "$(dirname "$0")/_library"
+
+exec "$HOME/code/operating_system/tool/bin/$ARCHITECTURE/application_build_helper" --create-storage-libraries "$@"
+
+
+
