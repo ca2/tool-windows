@@ -5,7 +5,7 @@ set -u
 usage() {
   cat <<'USAGE'
 Usage: repair-git-symlinks [--apply] [--root PATH]
-Default: check the current repository without changing files.
+Windows only. Default: check the current repository without changing files.
 Run repair-git-symlinks --apply to repair. --root PATH selects another repository.
 Repairs unchanged placeholders and broken links with an existing indexed target
 from Git. No target paths are guessed.
@@ -25,38 +25,105 @@ while (( $# )); do
     *) printf 'Unknown option: %s\n' "$1" >&2; usage >&2; exit 2 ;;
   esac
 done
+if [[ "$OSTYPE" != msys* && "$OSTYPE" != cygwin* ]] || ! command -v cygpath >/dev/null 2>&1; then
+  printf 'Git symlink repair is available only on Windows.\n' >&2
+  exit 2
+fi
+
 requested_root=$root
 root=$(git -C "$root" rev-parse --show-toplevel) || exit 1
 # Git for Windows can return a drive path that Bash file tests cannot use.
-if command -v cygpath >/dev/null 2>&1; then
-  root=$(cygpath -u "$root") || exit 1
+root=$(cygpath -u "$root") || exit 1
+repaired=0 would_repair=0 skipped=0 failed=0 repos=0 broken=0 retry_failed=0
+check_native_type=0
+if command -v powershell.exe >/dev/null 2>&1; then
+  check_native_type=1
 fi
-repaired=0 would_repair=0 skipped=0 failed=0 repos=0 broken=0
 
-repair_broken_link() {
-  local full=$1 repo=$2 oid=$3
-  local old indexed candidate= entry replacement backup
-  old=$(readlink -- "$full") || { ((failed+=1)); return; }
-  indexed=$(git -C "$repo" cat-file blob "$oid") || { ((failed+=1)); return; }
-  # Prefer the exact indexed destination if the working link was changed.
-  if [[ "$indexed" = /* || "$indexed" =~ ^[A-Za-z]: ]]; then
-    entry=$indexed
-  else
-    entry="${full%/*}/$indexed"
-  fi
-  if [[ -e "$entry" ]]; then
-    candidate=$entry
-  else
-    candidate=
-  fi
-  if [[ -z "$candidate" ]]; then
-    printf 'UNRESOLVED (target not found): %s -> %s\n' "$full" "$old"
-    ((broken+=1))
+# Check directory attributes in one native process per repository.
+find_mistyped_links() {
+  local native_repo
+  native_repo=$(cygpath -w -- "$1") || return 2
+  GIT_REPAIR_REPO="$native_repo" powershell.exe -NoProfile -NonInteractive -Command '
+    try {
+      $inputReader = [IO.StreamReader]::new([Console]::OpenStandardInput(), [Text.Encoding]::UTF8)
+      $outputStream = [Console]::OpenStandardOutput()
+      foreach ($path in $inputReader.ReadToEnd().Split([char]0)) {
+        if (!$path) { continue }
+        $item = Get-Item -Force -LiteralPath ([IO.Path]::Combine($env:GIT_REPAIR_REPO, $path)) -ErrorAction Stop
+        if (!($item.Attributes -band [IO.FileAttributes]::Directory)) {
+          $bytes = [Text.Encoding]::UTF8.GetBytes($path + [char]0)
+          $outputStream.Write($bytes, 0, $bytes.Length)
+        }
+      }
+      $outputStream.Flush()
+    } catch { [Console]::Error.WriteLine($_.Exception.Message); exit 2 }
+  '
+}
+
+# Set the directory flag explicitly even when the destination is another link.
+create_directory_link() {
+  if (( !check_native_type )); then
+    MSYS=winsymlinks:nativestrict ln -s -- "$2" "$1"
     return
   fi
-  replacement=$(realpath --relative-to="${full%/*}" -- "$candidate") || { ((failed+=1)); return; }
+  local native_path native_target=$2
+  native_path=$(cygpath -w -- "$1") || return 1
+  if [[ "$native_target" = /* || "$native_target" =~ ^[A-Za-z]: ]]; then
+    native_target=$(cygpath -w -- "$native_target") || return 1
+  else
+    native_target=${native_target//\//\\}
+  fi
+  GIT_REPAIR_LINK="$native_path" GIT_REPAIR_TARGET="$native_target" \
+    powershell.exe -NoProfile -NonInteractive -Command '
+      $ErrorActionPreference = "Stop"
+      Add-Type @"
+using System.Runtime.InteropServices;
+public static class LinkRepair {
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    public static extern bool CreateSymbolicLink(string path, string target, int flags);
+}
+"@
+      if ([LinkRepair]::CreateSymbolicLink($env:GIT_REPAIR_LINK, $env:GIT_REPAIR_TARGET, 3)) { exit 0 }
+      $code = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
+      if ($code -eq 87) {
+        if ([LinkRepair]::CreateSymbolicLink($env:GIT_REPAIR_LINK, $env:GIT_REPAIR_TARGET, 1)) { exit 0 }
+        $code = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
+      }
+      [Console]::Error.WriteLine(([ComponentModel.Win32Exception]::new($code)).Message)
+      exit 1
+    '
+}
+
+recreate_link() {
+  local full=$1 repo=$2 oid=$3 wrong_type=${4:-0}
+  local old indexed candidate= entry replacement backup
+  old=$(readlink -- "$full") || { ((failed+=1)); return; }
+  if (( wrong_type )); then
+    replacement=$old
+  else
+    indexed=$(git -C "$repo" cat-file blob "$oid") || { ((failed+=1)); return; }
+    # Prefer the exact indexed destination if the working link was changed.
+    if [[ "$indexed" = /* || "$indexed" =~ ^[A-Za-z]: ]]; then
+      entry=$indexed
+    else
+      entry="${full%/*}/$indexed"
+    fi
+    if [[ -e "$entry" ]]; then
+      candidate=$entry
+    else
+      candidate=
+    fi
+    if [[ -z "$candidate" ]]; then
+      printf 'UNRESOLVED (target not found): %s -> %s\n' "${full#"$root"/}" "$old"
+      ((broken+=1))
+      return
+    fi
+    replacement=$(realpath --relative-to="${full%/*}" -- "$candidate") || { ((failed+=1)); return; }
+  fi
   if (( !apply )); then
-    printf 'WOULD REPAIR BROKEN LINK: %s -> %s (was %s)\n' "$full" "$replacement" "$old"
+    printf 'WOULD RECREATE LINK: %s -> %s (was %s)\n' "${full#"$root"/}" "$replacement" "$old"
     ((would_repair+=1))
     return
   fi
@@ -67,44 +134,93 @@ repair_broken_link() {
     return
   fi
   # MSYS must create a native symlink rather than copying its destination.
-  if MSYS=winsymlinks:nativestrict ln -s -- "$replacement" "$full" && [[ -L "$full" && -e "$full" ]]; then
+  if {
+    if (( wrong_type )) || [[ -d "$candidate" ]]; then
+      create_directory_link "$full" "$replacement"
+    else
+      MSYS=winsymlinks:nativestrict ln -s -- "$replacement" "$full"
+    fi
+  } && [[ -L "$full" && -e "$full" ]]; then
     if rm -f -- "$backup"; then
-      printf 'REPAIRED BROKEN LINK: %s -> %s\n' "$full" "$replacement"
+      printf 'RECREATED LINK: %s -> %s\n' "${full#"$root"/}" "$replacement"
       ((repaired+=1))
     else
-      printf 'ERROR removing backup: %s\n' "$backup" >&2
+      printf 'ERROR removing backup: %s\n' "${backup#"$root"/}" >&2
       ((failed+=1))
     fi
   else
     if [[ -L "$full" ]]; then rm -- "$full"; fi
     if [[ ! -e "$full" && ! -L "$full" ]] && mv -- "$backup" "$full"; then
-      printf 'ERROR repair failed; original link restored: %s\n' "$full" >&2
+      printf 'LINK REPAIR DEFERRED; original link restored: %s\n' "${full#"$root"/}" >&2
+      ((retry_failed+=1))
     else
-      printf 'ERROR restore backup manually: %s\n' "$backup" >&2
+      printf 'ERROR restore backup manually: %s\n' "${backup#"$root"/}" >&2
+      ((failed+=1))
     fi
-    ((failed+=1))
   fi
 }
 
 repair_repo() {
   local repo=$1
-  local record mode oid stage path full actual backup listing
-  ((repos+=1))
-  printf '\nRepository: %s\n' "$repo"
-
+  local record mode oid stage path full actual backup listing incorrect target target_path bad_links
+  local -a directory_links=()
+  local -A mistyped=()
   # Materialize the listing so a Git failure cannot silently look like success.
   listing=$(mktemp) || { ((failed+=1)); return; }
-  if ! git -C "$repo" ls-files --stage -z > "$listing"; then
+  if ! (set -o pipefail; git -C "$repo" ls-files --stage -z | sed -z -n -E '/^(120000|160000) /p; /^(100644|100755) [^ ]+ [123]\t/p') > "$listing"; then
     rm -f -- "$listing"
     ((failed+=1))
     return
   fi
+  # Repair initialized submodules before checking any links owned by this index.
+  while IFS= read -r -d '' record; do
+    [[ "$record" == "160000 "* && "${record%%$'\t'*}" == *" 0" ]] || continue
+    full="$repo/${record#*$'\t'}"
+    if [[ -d "$full" && -e "$full/.git" ]]; then
+      repair_repo "$full"
+    else
+      printf 'SKIP uninitialized submodule: %s\n' "${full#"$root"/}"
+      ((skipped+=1))
+    fi
+  done < "$listing"
+
+  ((repos+=1))
+  if [[ "$repo" == "$root" ]]; then
+    printf '.\n'
+  else
+    printf '%s\n' "${repo#"$root"/}"
+  fi
+
   if (( apply )); then
     if ! git -C "$repo" config --local core.symlinks true; then
-      printf 'ERROR configuring core.symlinks: %s\n' "$repo" >&2
+      printf 'ERROR configuring core.symlinks: %s\n' "${repo#"$root"/}" >&2
       rm -f -- "$listing"
       ((failed+=1))
       return
+    fi
+  fi
+
+  if (( check_native_type )); then
+    while IFS= read -r -d '' record; do
+      [[ "$record" == "120000 "* && "${record%%$'\t'*}" == *" 0" ]] || continue
+      path=${record#*$'\t'}
+      [[ -L "$repo/$path" && -d "$repo/$path" ]] && directory_links+=("$path")
+    done < "$listing"
+    if (( ${#directory_links[@]} )); then
+      if ! bad_links=$(mktemp); then
+        rm -f -- "$listing"
+        ((failed+=1))
+        return
+      fi
+      if printf '%s\0' "${directory_links[@]}" | find_mistyped_links "$repo" > "$bad_links"; then
+        while IFS= read -r -d '' incorrect; do
+          mistyped["$incorrect"]=1
+        done < "$bad_links"
+      else
+        printf 'ERROR checking Windows link types in %s\n' "${repo#"$root"/}" >&2
+        ((failed+=1))
+      fi
+      rm -f -- "$bad_links"
     fi
   fi
 
@@ -116,77 +232,87 @@ repair_repo() {
     full="$repo/$path"
 
     if [[ "$stage" != 0 ]]; then
-      printf 'SKIP unmerged index entry: %s\n' "$full"
+      printf 'SKIP unmerged index entry: %s\n' "${full#"$root"/}"
       ((skipped+=1))
       continue
     fi
     case "$mode" in
-      160000)
-        if [[ -d "$full" && -e "$full/.git" ]]; then
-          repair_repo "$full"
-        else
-          printf 'SKIP uninitialized submodule: %s\n' "$full"
-          ((skipped+=1))
-        fi
-        ;;
       120000)
         if [[ -L "$full" ]]; then
           if [[ ! -e "$full" ]]; then
-            printf 'BROKEN LINK: %s -> %s\n' "$full" "$(readlink -- "$full")"
-            repair_broken_link "$full" "$repo" "$oid"
+            printf 'BROKEN LINK: %s -> %s\n' "${full#"$root"/}" "$(readlink -- "$full")"
+            recreate_link "$full" "$repo" "$oid"
+          elif [[ ${mistyped["$path"]:-0} == 1 ]]; then
+            printf 'INCORRECT WINDOWS LINK TYPE: %s\n' "${full#"$root"/}"
+            recreate_link "$full" "$repo" "$oid" 1
           fi
           continue
         fi
         if [[ ! -f "$full" ]]; then
-          printf 'SKIP missing or non-file: %s\n' "$full"
+          printf 'SKIP missing or non-file: %s\n' "${full#"$root"/}"
           ((skipped+=1))
           continue
         fi
         actual=$(git -C "$repo" hash-object --no-filters -- "$path") || {
-          printf 'SKIP cannot hash: %s\n' "$full"
+          printf 'SKIP cannot hash: %s\n' "${full#"$root"/}"
           ((skipped+=1))
           continue
         }
         if [[ "$actual" != "$oid" ]]; then
-          printf 'SKIP modified placeholder: %s\n' "$full"
+          printf 'SKIP modified placeholder: %s\n' "${full#"$root"/}"
           ((skipped+=1))
           continue
         fi
         if (( !apply )); then
-          printf 'WOULD REPAIR: %s\n' "$full"
+          printf 'WOULD REPAIR: %s\n' "${full#"$root"/}"
           ((would_repair+=1))
           continue
         fi
         backup=$(mktemp "${full}.symlink-backup.XXXXXXXX") || {
-          printf 'ERROR creating backup: %s\n' "$full" >&2
+          printf 'ERROR creating backup: %s\n' "${full#"$root"/}" >&2
           ((failed+=1))
           continue
         }
         if ! mv -f -- "$full" "$backup"; then
           rm -f -- "$backup"
-          printf 'ERROR backing up: %s\n' "$full" >&2
+          printf 'ERROR backing up: %s\n' "${full#"$root"/}" >&2
           ((failed+=1))
           continue
         fi
-        if git --literal-pathspecs -C "$repo" -c core.symlinks=true restore --worktree -- "$path" && [[ -L "$full" ]]; then
+        target_path=
+        if target=$(cat -- "$backup") && [[ -n "$target" ]]; then
+          target_path=$target
+          if [[ "$target" != /* && ! "$target" =~ ^[A-Za-z]: ]]; then
+            target_path="${full%/*}/$target"
+          fi
+        fi
+        if {
+          if [[ -d "$target_path" ]]; then
+            create_directory_link "$full" "$target"
+          else
+            git --literal-pathspecs -C "$repo" -c core.symlinks=true restore --worktree -- "$path"
+          fi
+        } && [[ -L "$full" ]]; then
           if rm -f -- "$backup"; then
-            printf 'REPAIRED: %s\n' "$full"
+            printf 'REPAIRED: %s\n' "${full#"$root"/}"
             ((repaired+=1))
           else
-            printf 'ERROR repaired, but backup cleanup failed: %s\n' "$backup" >&2
+            printf 'ERROR repaired, but backup cleanup failed: %s\n' "${backup#"$root"/}" >&2
             ((failed+=1))
           fi
         else
           if [[ -L "$full" ]]; then
-            printf 'ERROR unexpected symlink; backup retained: %s\n' "$backup" >&2
+            printf 'ERROR unexpected symlink; backup retained: %s\n' "${backup#"$root"/}" >&2
           elif [[ ! -e "$full" || -f "$full" ]]; then
             if rm -f -- "$full" && mv -- "$backup" "$full"; then
-              printf 'ERROR repair failed, placeholder restored: %s\n' "$full" >&2
+              printf 'LINK REPAIR DEFERRED; placeholder restored: %s\n' "${full#"$root"/}" >&2
+              ((retry_failed+=1))
+              continue
             else
-              printf 'ERROR restore backup manually: %s\n' "$backup" >&2
+              printf 'ERROR restore backup manually: %s\n' "${backup#"$root"/}" >&2
             fi
           else
-            printf 'ERROR unexpected path type; backup retained: %s\n' "$backup" >&2
+            printf 'ERROR unexpected path type; backup retained: %s\n' "${backup#"$root"/}" >&2
           fi
           ((failed+=1))
         fi
@@ -196,17 +322,29 @@ repair_repo() {
   rm -f -- "$listing"
 }
 
-repair_repo "$root"
-printf '\nRepositories: %d | Repaired: %d | Would repair: %d | Skipped: %d | Failed: %d\n' \
+# A repaired link can expose another link as a directory or make its target
+# reachable. Recheck after progress, and stop once a pass makes no repairs.
+while :; do
+  repaired_before=$repaired
+  repos=0 skipped=0 broken=0 retry_failed=0
+  repair_repo "$root"
+  if (( !apply || failed > 0 || repaired == repaired_before )); then
+    break
+  fi
+  printf 'Rechecking links after %d repair(s) in this pass.\n' "$((repaired - repaired_before))"
+done
+((failed+=retry_failed))
+
+printf 'Repositories: %d | Repaired: %d | Would repair: %d | Skipped: %d | Failed: %d\n' \
   "$repos" "$repaired" "$would_repair" "$skipped" "$failed"
 if (( broken > 0 )); then
-  printf '\nATTENTION: %d symlink(s) point to missing or inaccessible targets.\n' "$broken"
+  printf 'ATTENTION: %d symlink(s) point to missing or inaccessible targets.\n' "$broken"
   printf 'These targets are missing or ambiguous; restore the dependencies or correct these paths manually.\n'
 fi
 if (( failed > 0 )); then
   printf 'ERROR: some checks or repairs failed; review the messages above.\n'
 elif (( !apply && would_repair > 0 )); then
-  printf 'Repairs needed: %d symlink(s). Run:\n\n' "$would_repair"
+  printf 'Repairs needed: %d symlink(s). Run:\n' "$would_repair"
   printf '  repair-git-symlinks --apply'
   if [[ "$requested_root" != . ]]; then
     printf ' --root %q' "$requested_root"
