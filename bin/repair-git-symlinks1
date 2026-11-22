@@ -15,9 +15,15 @@ USAGE
 
 apply=0
 root=.
+plan=
+inspect=0
 while (( $# )); do
   case "$1" in
     --apply) apply=1; shift ;;
+    --plan|--inspect-plan)
+      if (( $# < 2 )); then printf 'Missing value for %s\n' "$1" >&2; exit 2; fi
+      [[ "$1" == --inspect-plan ]] && inspect=1
+      plan=$2; shift 2 ;;
     --root)
       if (( $# < 2 )); then echo 'Missing value for --root' >&2; exit 2; fi
       root=$2; shift 2 ;;
@@ -34,6 +40,70 @@ requested_root=$root
 root=$(git -C "$root" rev-parse --show-toplevel) || exit 1
 # Git for Windows can return a drive path that Bash file tests cannot use.
 root=$(cygpath -u "$root") || exit 1
+declare -A saved_actions=() matched_actions=()
+plan_output=
+if [[ -n "$plan" ]]; then
+  plan=$(cygpath -u -- "$plan") || exit 1
+  printf -v plan_root '# Repository: %q' "$root"
+  if (( inspect || apply )); then
+    if [[ -f "$plan" ]]; then
+      {
+        IFS= read -r version
+        IFS= read -r saved_root
+        IFS= read -r timestamp
+        if [[ "$version" == '# Git symlink repair plan v1' && "$saved_root" == "$plan_root" &&
+              "$timestamp" == '# Generated: '* ]]; then
+          while IFS= read -r action; do
+            case "$action" in
+              placeholder\ *|recreate\ *|directory\ *) saved_actions["$action"]=1 ;;
+            esac
+          done
+        fi
+      } < "$plan" || exit 1
+    fi
+    if (( ${#saved_actions[@]} == 0 )); then
+      (( inspect )) || printf 'No saved repair actions for this repository. Run another scan.\n' >&2
+      exit 3
+    fi
+    if (( inspect )); then
+      timestamp=${timestamp#\# Generated: }
+      generated=$(date -d "$timestamp" +%s) || exit 3
+      now=$(date +%s) || exit 1
+      printf '%s\n%s\n' "$timestamp" "$((now - generated))"
+      exit 0
+    fi
+  else
+    plan_output=$(mktemp -- "${plan}.XXXXXXXX") || exit 1
+    trap 'rm -f -- "$plan_output"' EXIT
+    timestamp=$(date -u '+%Y-%m-%d %H:%M:%S UTC') || exit 1
+    printf '%s\n' '# Git symlink repair plan v1' "$plan_root" "# Generated: $timestamp" > "$plan_output" || exit 1
+  fi
+fi
+
+# Treat plan lines as data and match them against the live working tree.
+select_action() {
+  [[ -n "$plan" ]] || return 0
+  local kind=$1 key
+  shift
+  printf -v key ' %q' "$@"
+  key="$kind$key"
+  if (( !apply )); then
+    if ! printf '%s\n' "$key" >> "$plan_output"; then
+      ((failed+=1))
+      return 1
+    fi
+  elif [[ ${saved_actions["$key"]:-0} == 1 ]]; then
+    matched_actions["$key"]=1
+    if ! git -C "$1" config --local core.symlinks true; then
+      printf 'ERROR configuring core.symlinks: %s\n' "$1" >&2
+      ((failed+=1))
+      return 1
+    fi
+  else
+    return 1
+  fi
+}
+
 repaired=0 would_repair=0 skipped=0 failed=0 repos=0 broken=0 retry_failed=0
 check_native_type=0
 if command -v powershell.exe >/dev/null 2>&1; then
@@ -122,6 +192,9 @@ recreate_link() {
     fi
     replacement=$(realpath --relative-to="${full%/*}" -- "$candidate") || { ((failed+=1)); return; }
   fi
+  local kind=recreate
+  (( wrong_type )) && kind=directory
+  select_action "$kind" "$repo" "${full#"$repo"/}" "$oid" "$old" "$replacement" || return
   if (( !apply )); then
     printf 'WOULD RECREATE LINK: %s -> %s (was %s)\n' "${full#"$root"/}" "$replacement" "$old"
     ((would_repair+=1))
@@ -191,7 +264,7 @@ repair_repo() {
     printf '%s\n' "${repo#"$root"/}"
   fi
 
-  if (( apply )); then
+  if (( apply )) && [[ -z "$plan" ]]; then
     if ! git -C "$repo" config --local core.symlinks true; then
       printf 'ERROR configuring core.symlinks: %s\n' "${repo#"$root"/}" >&2
       rm -f -- "$listing"
@@ -263,6 +336,7 @@ repair_repo() {
           ((skipped+=1))
           continue
         fi
+        select_action placeholder "$repo" "$path" "$oid" || continue
         if (( !apply )); then
           printf 'WOULD REPAIR: %s\n' "${full#"$root"/}"
           ((would_repair+=1))
@@ -334,6 +408,14 @@ while :; do
   printf 'Rechecking links after %d repair(s) in this pass.\n' "$((repaired - repaired_before))"
 done
 ((failed+=retry_failed))
+if [[ -n "$plan_output" ]] && (( failed == 0 )); then
+  mv -fT -- "$plan_output" "$plan" || exit 1
+  printf 'Saved %d repair action(s) to %s.\n' "$would_repair" "$plan"
+fi
+if [[ -n "$plan" ]] && (( apply && ${#matched_actions[@]} < ${#saved_actions[@]} )); then
+  printf 'Saved actions skipped because they no longer match: %d. Rescan to update the plan.\n' \
+    "$((${#saved_actions[@]} - ${#matched_actions[@]}))"
+fi
 
 printf 'Repositories: %d | Repaired: %d | Would repair: %d | Skipped: %d | Failed: %d\n' \
   "$repos" "$repaired" "$would_repair" "$skipped" "$failed"
@@ -343,6 +425,8 @@ if (( broken > 0 )); then
 fi
 if (( failed > 0 )); then
   printf 'ERROR: some checks or repairs failed; review the messages above.\n'
+elif [[ -n "$plan" ]] && (( !apply && would_repair > 0 )); then
+  printf 'Run application_build_helper --repair-git-symlinks again to review or apply the saved actions.\n'
 elif (( !apply && would_repair > 0 )); then
   printf 'Repairs needed: %d symlink(s). Run:\n' "$would_repair"
   printf '  repair-git-symlinks --apply'
