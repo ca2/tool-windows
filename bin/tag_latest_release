@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Tag the current repository's HEAD, including its recorded submodule commits.
+# Timestamp uses the machine's local time.
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "Error: run this command from inside a Git repository." >&2
+    exit 1
+fi
+
+if [[ "$(git rev-parse --is-inside-work-tree)" != "true" ]]; then
+    echo "Error: not inside a working tree." >&2
+    exit 1
+fi
+
+if ! git remote get-url origin >/dev/null 2>&1; then
+    echo "Error: this repository has no 'origin' remote." >&2
+    exit 1
+fi
+
+# A tag captures committed data only, not uncommitted changes or gitlinks.
+if [[ -n "$(git status --porcelain --untracked-files=no)" ]]; then
+    echo "Error: tracked files or submodules have uncommitted changes." >&2
+    echo "Commit them (including updated submodule pointers) before tagging." >&2
+    exit 1
+fi
+
+commit="$(git rev-parse HEAD)"
+timestamp="$(date +%Y-%m-%d-%H-%M-%S)"
+release_tag="release-${timestamp}"
+latest_tag="latest_release"
+
+if git show-ref --verify --quiet "refs/tags/${release_tag}"; then
+    echo "Error: ${release_tag} already exists locally; try again in a second." >&2
+    exit 1
+fi
+
+echo "Repository: $(git rev-parse --show-toplevel)"
+echo "Commit:     ${commit}"
+echo "Release:    ${release_tag}"
+echo "Alias:      ${latest_tag}"
+echo
+
+# Publish the immutable release first. Never force-push timestamped tags.
+git tag -a "${release_tag}" "${commit}" -m "Release ${release_tag}"
+git push origin "refs/tags/${release_tag}:refs/tags/${release_tag}"
+
+# Update the moving alias only after the permanent release is published.
+git tag -f "${latest_tag}" "${commit}"
+git push --force origin "refs/tags/${latest_tag}:refs/tags/${latest_tag}"
+
+echo
+echo "Published ${release_tag} and updated ${latest_tag} to ${commit}."
