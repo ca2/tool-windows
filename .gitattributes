@@ -1,2 +1,4 @@
 /shell text eol=lf
 /bin/defer_ssh_agent text eol=lf
+
+/windows_shell text eol=lf
