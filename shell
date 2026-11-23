@@ -1,35 +1,46 @@
 #!/usr/bin/env bash
 
-tool_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P) || exit 1
+ca2_run_windows_tool_shell() {
+    unset -f ca2_run_windows_tool_shell
+    local tool_dir machine architecture tool_path checkout parent origin
+    tool_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P) || return 1
 
-machine=$(uname -m) || exit 1
-case "$machine" in
-    x86_64|amd64) architecture=x64 ;;
-    aarch64|arm64) architecture=arm64 ;;
-    i[3-6]86|x86) architecture=x86 ;;
-    *)
-        printf 'Unsupported architecture: %s\n' "$machine" >&2
-        exit 1
-        ;;
-esac
+    machine=$(uname -m) || return 1
+    case "$machine" in
+        x86_64|amd64) architecture=x64 ;;
+        aarch64|arm64) architecture=arm64 ;;
+        i[3-6]86|x86) architecture=x86 ;;
+        *)
+            printf 'Unsupported architecture: %s\n' "$machine" >&2
+            return 1
+            ;;
+    esac
 
-export PATH="$tool_dir/bin:$tool_dir/bin/$architecture:$PATH"
+    tool_path="$tool_dir/bin:$tool_dir/bin/$architecture"
+    if [[ ${PATH:-} != "$tool_path" && ${PATH:-} != "$tool_path:"* ]]; then
+        export PATH="$tool_path${PATH:+:$PATH}"
+    fi
 
-checkout=$tool_dir
-while parent=$(git -C "$checkout" rev-parse --show-superproject-working-tree 2>/dev/null) && [[ -n "$parent" ]]; do
-    checkout=$parent
-done
-origin=$(git -C "$checkout" config --get remote.origin.url 2>/dev/null)
-case "$origin" in
-    ssh://*|git+ssh://*|ssh+git://*)
-        . "$tool_dir/bin/defer_ssh_agent"
-        ;;
-    *://*|[A-Za-z]:*|*/*:*|*\\*:*)
-        ;;
-    ?*:*)
-        # SCP-style SSH URL, such as git@github.com:ca2/windows-simple.
-        . "$tool_dir/bin/defer_ssh_agent"
-        ;;
-esac
+    checkout=$tool_dir
+    while parent=$(git -C "$checkout" rev-parse --show-superproject-working-tree 2>/dev/null) && [[ -n "$parent" ]]; do
+        checkout=$parent
+    done
+    origin=$(git -C "$checkout" config --get remote.origin.url 2>/dev/null) || origin=
+    case "$origin" in
+        ssh://*|git+ssh://*|ssh+git://*)
+            . "$tool_dir/bin/defer_ssh_agent" || return
+            ;;
+        *://*|[A-Za-z]:*|*/*:*|*\\*:*)
+            ;;
+        ?*:*)
+            # SCP-style SSH URL, such as git@github.com:ca2/windows-simple.
+            . "$tool_dir/bin/defer_ssh_agent" || return
+            ;;
+    esac
 
-exec bash -i
+    if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
+        exec bash -i
+    fi
+}
+
+ca2_run_windows_tool_shell "$@"
