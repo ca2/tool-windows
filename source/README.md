@@ -5,8 +5,11 @@ helper option and `wmain` arguments, as in `new_release_time.cpp`.
 Run `application_build_helper --create-shortcut-executables` to discover MSVC
 with `vswhere`, initialize its compiler environment, and compile every `.cpp`
 into `../bin/<architecture>/<name>.exe`. Object files and build scripts go into a temporary
-`application_build_helper-shortcuts/<process-id>` directory. The helper expects
-this repository at `~/code/operating_system/tool`.
+`application_build_helper-shortcuts/<process-id>` directory. Sources come from
+the target checkout's operating_system/operating_system-windows/tool/source.
+Pass `[CHECKOUT | --root CHECKOUT]` after --create-shortcut-executables to select
+it explicitly, or run from anywhere inside that checkout. Outputs use the
+helper/compiler target architecture (Win32 maps to x86), not the host architecture.
 
 Alternatively, from this repository's root in an MSVC developer command prompt:
 
@@ -20,9 +23,14 @@ extra arguments, waits for completion, and returns the helper's exit code.
 It requires no framework libraries. Its direct Windows API calls exist on XP;
 the MSVC runtime and generated executables have been validated on recent Windows.
 
-The application's `StaticMetaRelease` MSBuild project builds the shortcuts after
-copying the helper to `~/store/windows/<architecture>`. An ARM64 cross-build on
-an x64 host only copies the helper; generate its shortcuts on the ARM64 host.
+The MSBuild project derives the checkout from its own .vcxproj location, creates
+operating_system/operating_system-windows/tool/bin/<architecture>, and deploys
+the helper there for StaticMetaRelease and StaticMetaDebug (also StaticRelease
+on x64/ARM64). It does not deploy to a user-profile tool/store directory.
+StaticMetaRelease then runs that deployed helper with an explicit checkout to
+build the shortcuts in the same bin directory. Incremental output tracking uses
+that architecture directory too. An ARM64 cross-build on an x64 host only copies
+the helper; generate its shortcuts on the ARM64 host.
 
 The native `bin/<architecture>/new_release_time.exe` replaces the old Bash wrapper. In an
 already-open Git Bash session, run `hash -r` once to refresh command lookup.
