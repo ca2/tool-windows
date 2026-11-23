@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec application_build_helper --update-dedicatory "$@"

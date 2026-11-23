@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+ca2_run_workspace_shell() {
+    unset -f ca2_run_workspace_shell
+    local checkout shell_script
+    checkout=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P) || return 1
+    # When installed in windows-tool, delegate to the environment setup beside us.
+    # The identical root copy delegates back into the Windows tool submodule.
+    shell_script="$checkout/tool/windows_shell"
+    if [[ ! -f "$shell_script" ]]; then
+        shell_script="$(dirname -- "${BASH_SOURCE[0]}")/windows_shell"
+    fi
+    if [[ ! -f "$shell_script" ]]; then
+        shell_script="$checkout/operating_system/operating_system-windows/tool/windows_shell"
+    fi
+    if [[ ! -f "$shell_script" ]]; then
+        printf '%s\n' 'The Windows tool submodule is missing. Run git submodule update --init --recursive.' >&2
+        return 1
+    fi
+
+    # Only the project-root copy performs clone-local setup. The source copy
+    # beside windows_shell can still be used without initializing a parent repo.
+    if [[ -f "$checkout/operating_system/operating_system-windows/tool/windows_shell" ]]; then
+        local state windows_checkout initialized_root architecture machine initializer
+        state="$checkout/.project-root-instance/initialized-root.txt"
+        windows_checkout=$(cygpath -am "$checkout") || return 1
+        initialized_root=
+        if [[ -f "$state" ]]; then
+            IFS= read -r initialized_root < "$state" || initialized_root=
+            initialized_root=${initialized_root%$'\r'}
+        fi
+        if [[ "$initialized_root" != "1:$windows_checkout" || ! -f "$checkout/shell.lnk" ]]; then
+            machine=${PROCESSOR_ARCHITEW6432:-${PROCESSOR_ARCHITECTURE:-}}
+            if [[ -z "$machine" ]]; then machine=$(uname -m) || return 1; fi
+            case "$machine" in
+                AMD64|amd64|x86_64) architecture=x64 ;;
+                ARM64|arm64|aarch64) architecture=arm64 ;;
+                x86|i[3-6]86) architecture=x86 ;;
+                *) printf 'Unsupported architecture for instance setup: %s\n' "$machine" >&2; return 1 ;;
+            esac
+            initializer="$checkout/operating_system/operating_system-windows/tool/bin/$architecture/initialize_project_root_instance.exe"
+            if [[ ! -f "$initializer" ]]; then
+                printf 'Missing %s. Build/deploy initialize_project_root_instance with application_build_helper --create-shortcut-executables.\n' "$initializer" >&2
+                return 1
+            fi
+            (cd -- "$checkout" && "$initializer" --root "$windows_checkout") || return
+        fi
+    fi
+
+    if [[ ${BASH_SOURCE[0]} != "$0" ]]; then
+        . "$shell_script" "$@"
+    else
+        exec bash "$shell_script" "$@"
+    fi
+}
+
+ca2_run_workspace_shell "$@"
