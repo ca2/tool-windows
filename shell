@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+tool_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P) || exit 1
+
+machine=$(uname -m) || exit 1
+case "$machine" in
+    x86_64|amd64) architecture=x64 ;;
+    aarch64|arm64) architecture=arm64 ;;
+    i[3-6]86|x86) architecture=x86 ;;
+    *)
+        printf 'Unsupported architecture: %s\n' "$machine" >&2
+        exit 1
+        ;;
+esac
+
+export PATH="$tool_dir/bin:$tool_dir/bin/$architecture:$PATH"
+
+. "$tool_dir/bin/defer_ssh_agent"
+
+exec bash -i
