@@ -1,1 +1,2 @@
 /shell text eol=lf
+/bin/defer_ssh_agent text eol=lf

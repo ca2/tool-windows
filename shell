@@ -15,6 +15,21 @@ esac
 
 export PATH="$tool_dir/bin:$tool_dir/bin/$architecture:$PATH"
 
-. "$tool_dir/bin/defer_ssh_agent"
+checkout=$tool_dir
+while parent=$(git -C "$checkout" rev-parse --show-superproject-working-tree 2>/dev/null) && [[ -n "$parent" ]]; do
+    checkout=$parent
+done
+origin=$(git -C "$checkout" config --get remote.origin.url 2>/dev/null)
+case "$origin" in
+    ssh://*|git+ssh://*|ssh+git://*)
+        . "$tool_dir/bin/defer_ssh_agent"
+        ;;
+    *://*|[A-Za-z]:*|*/*:*|*\\*:*)
+        ;;
+    ?*:*)
+        # SCP-style SSH URL, such as git@github.com:ca2/windows-simple.
+        . "$tool_dir/bin/defer_ssh_agent"
+        ;;
+esac
 
 exec bash -i
