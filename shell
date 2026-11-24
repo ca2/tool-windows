@@ -29,7 +29,18 @@ ca2_run_workspace_shell() {
             IFS= read -r initialized_root < "$state" || initialized_root=
             initialized_root=${initialized_root%$'\r'}
         fi
-        if [[ "$initialized_root" != "1:$windows_checkout" || ! -f "$checkout/shell.lnk" ]]; then
+        # The launchers use a fresh bootstrap copy if setup is absent or stale.
+        # Refresh the reusable instance helper whenever a tracked update arrives.
+        local helper_bin prepared_helper
+        case "${PROCESSOR_ARCHITEW6432:-${PROCESSOR_ARCHITECTURE:-$(uname -m)}}" in
+            AMD64|amd64|x86_64) architecture=x64 ;;
+            ARM64|arm64|aarch64) architecture=arm64 ;;
+            *) architecture=x86 ;;
+        esac
+        helper_bin="$checkout/operating_system/operating_system-windows/tool/collection/bin/$architecture"
+        prepared_helper="$checkout/.project-root-instance/helper/$architecture/application_build_helper.exe"
+        if [[ "$initialized_root" != "1:$windows_checkout" || ! -f "$checkout/shell.lnk" ]] ||
+            ! cmp -s -- "$helper_bin/application_build_helper.exe" "$prepared_helper"; then
             machine=${PROCESSOR_ARCHITEW6432:-${PROCESSOR_ARCHITECTURE:-}}
             if [[ -z "$machine" ]]; then machine=$(uname -m) || return 1; fi
             case "$machine" in

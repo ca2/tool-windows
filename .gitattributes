@@ -2,3 +2,6 @@
 /bin/defer_ssh_agent text eol=lf
 
 /windows_shell text eol=lf
+/bin/pull text eol=lf
+
+/bin/application_build_helper text eol=lf

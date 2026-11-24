@@ -76,16 +76,17 @@ removal. Ignore rules cannot hide an already tracked file.
 
 The helper's MSBuild deployment derives the checkout from the .vcxproj location
 and copies self-contained builds into that checkout's
-operating_system/operating_system-windows/tool/bin/<architecture> (Win32 uses
-x86). StaticMetaRelease automatically runs the deployed helper to generate its
-shortcuts there. It no longer deploys to a user-profile store/tool directory.
+operating_system/operating_system-windows/tool/collection/bin/<architecture>
+(Win32 uses x86). StaticMetaRelease runs a private copy of the newly built helper
+to generate shortcuts separately in tool/bin/<architecture>. It no longer deploys to a user-profile store/tool directory.
 
 To regenerate manually, run
 `application_build_helper --create-shortcut-executables [--root CHECKOUT]`.
 Without --root, the caller directory selects the enclosing checkout. This builds
-initialize_project_root.exe, initialize_project_root_instance.exe, and
-launch_shell.exe (alongside other shortcut sources). Deploy each native shortcut
-with its matching helper in tool/bin/<architecture>. The portable launcher is
+application_build_helper.exe, initialize_project_root.exe,
+initialize_project_root_instance.exe, and launch_shell.exe (alongside other
+shortcut sources). Deploy each native shortcut
+in tool/bin/<architecture>, with its full helper in collection/bin/<architecture>. The portable launcher is
 built with ../_tool/shell/build.ps1 and shared code in
 ../_tool/architecure_launcher. Its routing settings are marked at the top of
 shell.cpp. The blue ICO can be rebuilt using image/build_shell_icon.py (Pillow).
@@ -94,3 +95,84 @@ The launcher uses XP-era static imports and dynamically loads newer architecture
 queries. Its payloads and Git for Windows must independently support the target
 OS. Recent Windows/MSVC validation does not establish XP, ReactOS, or ARM64
 runtime compatibility.
+
+## Running the helper without locking tracked executables
+
+The tracked tool/collection/bin/<architecture>/application_build_helper.exe is the
+self-contained distributable, not the normal execution location.
+--initialize-project-root-instance prepares a reusable copy at
+.project-root-instance/helper/<architecture>/application_build_helper.exe.
+
+Every supported entry point launches a unique private copy beneath
+.project-root-instance/runtime/run.* and waits for it, preserving arguments,
+working directory, standard streams, and exit status. The private copy is
+removed after completion. This permits concurrent builds and lets Git replace
+the distributable without colliding with a running helper.
+
+- Git Bash: tool/bin/application_build_helper is a shell launcher. tool/shell
+  puts tool/bin before tool/bin/<architecture> on PATH. pull uses this launcher.
+- MSBuild: Common.props and the shared/static project property sheets call
+  tool/bin/<host-architecture>/application_build_helper.exe. Shader
+  custom builds use the same caller. It is built from
+  source/application_build_helper.cpp using shortcut.h, with no inserted
+  option: every command-line argument is forwarded. The host architecture is
+  selected independently of the project's target architecture.
+- The helper's shortcut-generation event directly makes an ignored private copy
+  of the newly built helper and runs it with an explicit checkout. This can
+  regenerate a missing caller without executing or locking the caller itself.
+- Native shortcut executables: shortcut.h resolves the distributable under
+  tool/collection/bin/<architecture>, finds the checkout, and makes a private runtime copy before
+  CreateProcessW. It does not depend on PATH or change the caller's directory.
+
+Before instance setup is available, launchers bootstrap by copying from the
+usual tool/collection/bin/<architecture> location. They use the prepared instance copy
+only when it matches the current distributable byte-for-byte; stale or missing
+copies fall back to the current distributable. The first tool/shell run after
+a helper update also refreshes instance setup. The template itself is never
+executed, so instance setup may refresh it while other private copies run.
+
+The existing /.project-root-instance/ rule ignores all runtime files. Older
+layouts also get a self-ignoring runtime/.gitignore containing *, without
+modifying tracked .gitignore immediately before pull. Launchers do not force
+reset Git state or discard worktree changes.
+
+Explicitly executing tool/collection/bin/<architecture>/application_build_helper.exe
+bypasses these launchers and can still lock the tracked file. Use the shell
+command, native caller, or generated shortcuts. A separately running old helper
+can also block updates until it exits. The tracked native caller/shortcuts can be locked while they themselves run;
+use the Bash pull wrapper when updating those binaries. This scheme specifically
+unlocks the full helper.
+
+Until the updated launchers have been pulled, bootstrap once from Git Bash at
+the checkout root (select the correct architecture):
+
+```bash
+temporary=$(mktemp -d) || exit 1
+cp ./operating_system/operating_system-windows/tool/collection/bin/x64/application_build_helper.exe "$temporary/application_build_helper.exe" &&
+    "$temporary/application_build_helper.exe" --git-pull
+result=$?
+rm -f -- "$temporary/application_build_helper.exe"
+rmdir -- "$temporary" 2>/dev/null || true
+(exit "$result")
+```
+
+The native caller and shortcuts use XP-compatible file/process APIs. A custom DLL-dependent
+helper also needs its dependencies available. XP/ReactOS and ARM64 runtime
+compatibility must still be tested on those operating systems.
+
+### Distribution versus PATH
+
+The same filename has two deliberate roles:
+
+| Location under the Windows tool repository | Role |
+| --- | --- |
+| bin/<architecture>/application_build_helper.exe | Small native caller, built from source/application_build_helper.cpp; safe to put on PATH |
+| collection/bin/<architecture>/application_build_helper.exe | Full self-contained distributable; not put on PATH |
+
+The caller explicitly resolves the collection path, so identical filenames do
+not cause recursion. tool/shell adds only bin and bin/<architecture> to PATH.
+The extensionless Bash launcher in bin also resolves collection explicitly.
+
+When regenerating shortcuts, use the extensionless Bash launcher or MSBuild's
+BuildShortcutExecutables target. Running the native caller while trying to
+replace that very caller can still hit Windows' executable-file lock.
