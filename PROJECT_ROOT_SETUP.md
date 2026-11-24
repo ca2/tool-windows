@@ -74,8 +74,15 @@ removal. Ignore rules cannot hide an already tracked file.
 
 ## Building the tools
 
-Build application_build_helper, then run
-`application_build_helper --create-shortcut-executables`. This builds
+The helper's MSBuild deployment derives the checkout from the .vcxproj location
+and copies self-contained builds into that checkout's
+operating_system/operating_system-windows/tool/bin/<architecture> (Win32 uses
+x86). StaticMetaRelease automatically runs the deployed helper to generate its
+shortcuts there. It no longer deploys to a user-profile store/tool directory.
+
+To regenerate manually, run
+`application_build_helper --create-shortcut-executables [--root CHECKOUT]`.
+Without --root, the caller directory selects the enclosing checkout. This builds
 initialize_project_root.exe, initialize_project_root_instance.exe, and
 launch_shell.exe (alongside other shortcut sources). Deploy each native shortcut
 with its matching helper in tool/bin/<architecture>. The portable launcher is
