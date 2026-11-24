@@ -176,3 +176,39 @@ The extensionless Bash launcher in bin also resolves collection explicitly.
 When regenerating shortcuts, use the extensionless Bash launcher or MSBuild's
 BuildShortcutExecutables target. Running the native caller while trying to
 replace that very caller can still hit Windows' executable-file lock.
+
+## Project-local integration data
+
+Set APPLICATION_BUILD_HELPER_INTEGRATION_FOLDER to an absolute writable path
+before starting the helper. For example, in Git Bash at the project root:
+
+```bash
+export APPLICATION_BUILD_HELPER_INTEGRATION_FOLDER="$(cygpath -am "$PWD/build/integration")"
+application_build_helper --defer-prepare-folder "$PWD/source/app/acme" x64 Debug
+```
+
+The helper applies this setting before OS-node startup. App-data storage,
+startup instance metadata and last-run metadata honor the same directory,
+instead of creating %APPDATA%/integration/application_build_helper. The path
+is the exact application data folder; another integration suffix is not added.
+With the variable unset, existing default locations remain unchanged. This
+setting does not redirect unrelated roaming preferences (such as merge-tool
+preferences) or home-directory diagnostic logs.
+
+For MSBuild/Visual Studio, define ApplicationBuildHelperIntegrationFolder, e.g.
+in Directory.Build.props at the checkout root:
+
+```xml
+<Project>
+  <PropertyGroup>
+    <ApplicationBuildHelperIntegrationFolder>$(MSBuildThisFileDirectory)build\integration</ApplicationBuildHelperIntegrationFolder>
+  </PropertyGroup>
+</Project>
+```
+
+Or pass `/p:ApplicationBuildHelperIntegrationFolder=C:\project\build\integration`
+on the MSBuild command line. Common.props and the shared/static property sheets
+export this value only in the helper's prebuild command environment. An empty
+property preserves an explicitly inherited environment variable. Use an absolute
+path, especially when building projects in parallel from different directories.
+Ignore `/build/integration/` (or your chosen build-data path) in the project.
