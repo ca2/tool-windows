@@ -17,18 +17,21 @@ Alternatively, from this repository's root in an MSVC developer command prompt:
 cl /nologo /O2 /MT /EHsc /std:c++17 source\new_release_time.cpp /Febin\x64\new_release_time.exe /Fo%TEMP%\new_release_time.obj
 ```
 
-The shortcut finds `application_build_helper.exe` beside its own executable in
-`bin/<architecture>`, inherits the working directory and standard streams, forwards
-extra arguments, waits for completion, and returns the helper's exit code.
+The shortcut finds the full distributable in collection/bin/<architecture>, then
+launches a private copy in the checkout's ignored .project-root-instance/runtime.
+It prefers the instance-prepared helper template when current, and bootstraps
+from the distributable otherwise. It inherits cwd/streams, forwards arguments,
+waits, cleans up, and returns the helper's exit code. See PROJECT_ROOT_SETUP.md
+for the shell and MSBuild launchers and first-instance setup.
 It requires no framework libraries. Its direct Windows API calls exist on XP;
 the MSVC runtime and generated executables have been validated on recent Windows.
 
 The MSBuild project derives the checkout from its own .vcxproj location, creates
-operating_system/operating_system-windows/tool/bin/<architecture>, and deploys
-the helper there for StaticMetaRelease and StaticMetaDebug (also StaticRelease
+operating_system/operating_system-windows/tool/collection/bin/<architecture>,
+and deploys the full helper there for StaticMetaRelease and StaticMetaDebug (also StaticRelease
 on x64/ARM64). It does not deploy to a user-profile tool/store directory.
 StaticMetaRelease then runs that deployed helper with an explicit checkout to
-build the shortcuts in the same bin directory. Incremental output tracking uses
+build shortcuts separately in tool/bin/<architecture>. Incremental output tracking uses
 that architecture directory too. An ARM64 cross-build on an x64 host only copies
 the helper; generate its shortcuts on the ARM64 host.
 
@@ -60,7 +63,8 @@ It resolves the checkout from its own location, detects the native architecture,
 and launches `bin/<architecture>/launch_shell.exe` in that checkout. It has no
 machine-specific path internally. Run ./tool/shell after moving a checkout to refresh its local .lnk properties.
 Arguments are forwarded to launch_shell, which invokes the helper's `--shell`.
-The helper executable must be beside launch_shell in the architecture directory.
+The full helper must be in collection/bin/<architecture>; launch_shell and the
+small generic caller stay in bin/<architecture>.
 `source/launch_shell.cpp` replaces the former `source/shell.cpp` helper shortcut.
 
 Run `../_tool/shell/build.ps1` to build/deploy the portable root launcher, and
@@ -76,3 +80,19 @@ which retains the existing environment setup. `--shell` opens Git Bash with
 `--no-cd -c "exec bash ./tool/shell"` and checks root `tool/shell` and the local
 `windows_shell`. Helper checkout resolution uses the caller directory or an
 explicit checkout, independently of the helper installation directory.
+
+`application_build_helper.cpp` builds the general-purpose intermediate
+caller in bin/<architecture>/application_build_helper.exe. It forwards
+all arguments without adding an option; the other shortcut sources insert their
+specific option. Common.props and the shared/static property sheets select the
+host-architecture caller through ApplicationBuildHelperCaller.props. The caller
+replaces the former application_build_helper.cmd entry point. It accepts optional
+APPLICATION_BUILD_HELPER_SOURCE and APPLICATION_BUILD_HELPER_CHECKOUT environment
+overrides for explicitly selecting a distributable/check-out; otherwise both
+are resolved relative to the caller executable. All execution still occurs in
+private ignored runtime directories.
+
+Manual regeneration should use the Bash command (bin/application_build_helper)
+or the MSBuild BuildShortcutExecutables bootstrap target: a native caller cannot
+wait for its own executable to be overwritten. Normal build events invoke the
+caller; shortcut generation uses a direct private helper copy instead.

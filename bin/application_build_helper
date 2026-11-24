@@ -1,0 +1,43 @@
+#!/bin/sh
+case "$(uname -s)" in
+    MINGW*|MSYS*|CYGWIN*) ;;
+    *) printf '%s\n' 'This launcher requires Windows.' >&2; exit 1 ;;
+esac
+bin=$(cd -- "$(dirname -- "$0")" && pwd -P) || exit 1
+checkout=$(cd -- "$bin/../../../.." && pwd -P) || exit 1
+machine=${PROCESSOR_ARCHITEW6432:-${PROCESSOR_ARCHITECTURE:-}}
+[ -n "$machine" ] || machine=$(uname -m)
+case "$machine" in
+    AMD64|amd64|x86_64) architecture=x64 ;;
+    ARM64|arm64|aarch64) architecture=arm64 ;;
+    x86|i[3-6]86) architecture=x86 ;;
+    *) printf 'Unsupported architecture: %s\n' "$machine" >&2; exit 1 ;;
+esac
+helper="$bin/../collection/bin/$architecture/application_build_helper.exe"
+if [ ! -f "$helper" ]; then printf 'Missing helper: %s\n' "$helper" >&2; exit 1; fi
+base="$checkout/.project-root-instance/runtime"
+mkdir -p -- "$base" || exit 1
+base=$(cd -- "$base" && pwd -P) || exit 1
+case "$base" in
+    "$checkout"/.project-root-instance/runtime) ;;
+    *) printf '%s\n' 'Runtime directory must stay inside the checkout.' >&2; exit 1 ;;
+esac
+# Also ignore runtime files in older layouts without a root ignore rule.
+[ -f "$base/.gitignore" ] || printf '*\n' > "$base/.gitignore" || exit 1
+runtime=$(mktemp -d -- "$base/run.XXXXXXXX") || exit 1
+cleanup() {
+    case "$runtime" in "$base"/run.?*) rm -rf -- "$runtime" ;; esac
+}
+trap cleanup 0
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+prepared="$checkout/.project-root-instance/helper/$architecture/application_build_helper.exe"
+source=$helper
+if cmp -s -- "$helper" "$prepared"; then source=$prepared; fi
+if ! cp -- "$source" "$runtime/application_build_helper.exe" || ! cmp -s -- "$helper" "$runtime/application_build_helper.exe"; then
+    cp -- "$helper" "$runtime/application_build_helper.exe" || exit 1
+fi
+"$runtime/application_build_helper.exe" "$@"
+result=$?
+exit "$result"
