@@ -27,8 +27,8 @@ It leaves an existing ignored shortcut alone.
 ## Using a fresh clone
 
 Initialize the required Windows tool submodule and ensure its native helper
-and shortcut executables are available. Install GitHub CLI and authenticate
-with `gh auth login --hostname github.com` for the permission scan during setup.
+and shortcut executables are available. Setup offers to install GitHub CLI via
+WinGet if missing, then offers browser login if authentication is needed.
 In Git Bash, from the project root:
 
 ```bash
@@ -230,8 +230,12 @@ and cpp-port membership. A missing cache prompts initialization. Read-only
 vendor boundaries are retained for automatic commit/push traversal. Refresh
 instance setup after changing accounts, remotes, submodules or GitHub permissions;
 pushes remain subject to the actual Git transport credentials and server rules.
-GitHub CLI must be installed/authenticated for cache generation. Cache consumption
-and ordinary builds do not require a live permission query. API failures return
-nonzero, do not overwrite the previous cache, and do not mark setup successful.
+GitHub CLI must be installed/authenticated for cache generation. On recent
+Windows, setup offers a small WinGet installation and browser-login wizard.
+Each step defaults to No; WinGet may show agreements or an elevation prompt.
+Setup checks standard installation paths so a new shell is usually unnecessary.
+Without WinGet, or on ReactOS/XP, follow the printed manual setup instructions.
+Cache consumption and ordinary builds do not require a live permission query.
+API failures return nonzero, do not overwrite the previous cache, and do not mark setup successful.
 See source/console_build_tools/application_build_helper/GIT_WORKFLOWS.md in the
 project source for cache format, enrollment rules, and refresh behavior.
