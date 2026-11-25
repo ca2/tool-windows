@@ -16,8 +16,9 @@ from the local operating_system/operating_system-windows/tool repository:
 | bin/shell.exe | tool/bin/shell.exe |
 | image/shell.ico | tool/image/shell.ico |
 
-It ensures root .gitignore ends with `/shell.lnk` and
-`/.project-root-instance/` rules. Commit those portable files and ignore rules
+It ensures root .gitignore ends with `/shell.lnk`, `/.project-root-instance/`
+and `/_project_root_instance/` rules. It also sets `/tool/shell text eol=lf` in
+root .gitattributes so Windows Git checkouts preserve LF. Commit these files
 when creating/updating the project's ca2 layout. This command never creates
 shell.lnk or an instance completion marker, never downloads, and never
 initializes submodules. It removes the obsolete root shell.exe during migration.
@@ -26,7 +27,9 @@ It leaves an existing ignored shortcut alone.
 ## Using a fresh clone
 
 Initialize the required Windows tool submodule and ensure its native helper
-and shortcut executables are available. In Git Bash, from the project root:
+and shortcut executables are available. Install GitHub CLI and authenticate
+with `gh auth login --hostname github.com` for the permission scan during setup.
+In Git Bash, from the project root:
 
 ```bash
 ./tool/shell
@@ -212,3 +215,23 @@ export this value only in the helper's prebuild command environment. An empty
 property preserves an explicitly inherited environment variable. Use an absolute
 path, especially when building projects in parallel from different directories.
 Ignore `/build/integration/` (or your chosen build-data path) in the project.
+
+## Cached GitHub write access
+
+Instance setup also refreshes `_project_root_instance/github_write_access.txt`.
+It uses local authenticated GitHub CLI (`gh auth login --hostname github.com`)
+to check the root, initialized submodules recursively, and the declared URLs of
+uninitialized submodules. Only confirmed writable owner/repository names are
+cached, with the authenticated login recorded in a comment. No tokens are stored.
+The underscore-named directory is ignored alongside .project-root-instance.
+
+The Git commit/pull/checkout workflows use this list instead of hard-coded ca2
+and cpp-port membership. A missing cache prompts initialization. Read-only
+vendor boundaries are retained for automatic commit/push traversal. Refresh
+instance setup after changing accounts, remotes, submodules or GitHub permissions;
+pushes remain subject to the actual Git transport credentials and server rules.
+GitHub CLI must be installed/authenticated for cache generation. Cache consumption
+and ordinary builds do not require a live permission query. API failures return
+nonzero, do not overwrite the previous cache, and do not mark setup successful.
+See source/console_build_tools/application_build_helper/GIT_WORKFLOWS.md in the
+project source for cache format, enrollment rules, and refresh behavior.

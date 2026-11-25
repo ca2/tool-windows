@@ -39,7 +39,7 @@ ca2_run_workspace_shell() {
         esac
         helper_bin="$checkout/operating_system/operating_system-windows/tool/collection/bin/$architecture"
         prepared_helper="$checkout/.project-root-instance/helper/$architecture/application_build_helper.exe"
-        if [[ "$initialized_root" != "1:$windows_checkout" || ! -f "$checkout/shell.lnk" ]] ||
+        if [[ "$initialized_root" != "1:$windows_checkout" || ! -f "$checkout/shell.lnk" || ! -f "$checkout/_project_root_instance/github_write_access.txt" ]] ||
             ! cmp -s -- "$helper_bin/application_build_helper.exe" "$prepared_helper"; then
             machine=${PROCESSOR_ARCHITEW6432:-${PROCESSOR_ARCHITECTURE:-}}
             if [[ -z "$machine" ]]; then machine=$(uname -m) || return 1; fi
